@@ -1,0 +1,20 @@
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Branch deploys and deploy previews never index. Production does.
+[context.deploy-preview]
+  command = "printf '/*\n  X-Robots-Tag: noindex\n' >> _headers"
+[context.branch-deploy]
+  command = "printf '/*\n  X-Robots-Tag: noindex\n' >> _headers"
