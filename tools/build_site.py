@@ -252,12 +252,12 @@ home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denv
 <section class="record" id="statement"><div class="wrap">
   <div>
     <h2 class="word rv">The <em class="acc">first.</em></h2>
-    <p class="lede" style="margin-top:18px"><strong style="color:var(--ink)">Your statement, every month.</strong></p>
-    <p class="lede">Not a payout and a line. Rental activity, revenue, fees, owner expenses and adjustments, with reservation detail in your owner portal. The decisions behind the numbers, explained when we make them.</p>
+    <p class="lede" style="margin-top:18px"><strong style="color:var(--ink)">Your month, counted, on the first.</strong></p>
+    <p class="lede">A statement that reads like the month you just had: nights, turns, visits, what was fixed, then revenue, fees, owner expenses and adjustments. Reservation detail sits in your owner portal. The decisions behind the numbers were explained the day we made them.</p>
     <p class="small" style="margin-top:20px">Counts only. Revenue and fee figures are never published on this site.</p>
   </div>
   <div class="stmt" aria-label="Sample owner statement">
-    <div class="top"><span>[Home name], Wash Park</span><span>November statement</span></div>
+    <div class="top"><span>[Home name], Wash Park</span><span>November, counted</span></div>
     <div class="grid">
       <div class="cell"><b>23</b><span>short stay nights, 7 turns</span></div>
       <div class="cell"><b>7</b><span>furnished stay nights, of 30</span></div>
