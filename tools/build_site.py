@@ -2,6 +2,14 @@
 """Assemble skyrundenver.com v0.1 pages from shared partials. Run: python3 -I build_site.py <site dir>"""
 import sys, pathlib
 SITE = pathlib.Path(sys.argv[1])
+
+# Cache busters: assets are served immutable for a year, so every CSS or JS change must change the URL.
+import hashlib
+def _v(path):
+    f = SITE / path
+    return hashlib.sha1(f.read_bytes()).hexdigest()[:8] if f.exists() else '0'
+CSS_V = _v('assets/css/site.css')
+JS_V = _v('assets/js/site.js')
 CITIES = ['Denver', 'Arvada', 'Wheat Ridge', 'Lakewood', 'Englewood', 'Centennial']
 
 # City rules. Drafted 2026-11-12 from each city's own pages; pending SkyRun Denver sign off (the [Draft] tag comes off on sign off).
@@ -34,7 +42,7 @@ def head(title, desc, path, extra=''):
 <meta property="og:image" content="{ORIGIN}/assets/img/skyrun-denver-horizontal.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="/assets/fonts/schibsted-grotesk-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/site.css?v={CSS_V}">
 <link rel="icon" href="/assets/img/favicon.png" type="image/png">
 {extra}
 <!-- GA4: G-SFVBFCQWDM. Installed through Google Tag Manager at launch; see the measurement spec. -->
@@ -75,7 +83,7 @@ def footer():
   <div><h4>Guests and owners</h4><p><a href="https://skyrun.com/denver/" rel="noopener">Find a stay</a></p><p><a href="https://skyrundenver.trackhs.com/owner/" rel="noopener">Owner login</a></p><p><a href="https://skyrun.com/privacy-policy/" rel="noopener">Privacy</a></p></div>
 </div></footer>
 <a class="btn mcta" href="#evaluation">Request a property evaluation</a>
-<script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/site.js?v={JS_V}" defer></script>
 </body>
 </html>
 '''
