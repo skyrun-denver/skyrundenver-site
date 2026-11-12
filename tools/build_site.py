@@ -138,9 +138,23 @@ def split():
 '''
 
 def voice():
-    return '''<section class="voice" aria-label="Owner review"><div class="wrap">
-  <div class="photo" data-label="Photo: the owner or their home, with permission"></div>
-  <div><blockquote>[Owner review goes here, in the owner's own words, used with permission.]</blockquote><cite>[Owner name and neighborhood, as they want to be credited]</cite></div>
+    # Owner testimonials, verbatim with permission. Three placeholder slides until Sebastien supplies real ones; nothing in brackets ships.
+    slides = [
+        ('[Owner review one, in the owner\'s own words, used with permission.]', '[Owner name, neighborhood]', 'Short stays since [year]'),
+        ('[Owner review two.]', '[Owner name, neighborhood]', 'Monthly stays since [year]'),
+        ('[Owner review three.]', '[Owner name, neighborhood]', 'Short stays since [year]'),
+    ]
+    items = ''.join(f'<li class="slide"><blockquote>{q}</blockquote><cite>{c}<small>{m}</small></cite></li>' for q, c, m in slides)
+    dots = ''.join(f'<button type="button" aria-label="Review {i + 1}"{" aria-current=\"true\"" if i == 0 else ""}></button>' for i in range(len(slides)))
+    return f'''<section class="voice" id="reviews" aria-label="Owner reviews"><div class="wrap">
+  <div class="voice-head">
+    <h2 class="word rv">Owners <em class="acc">say.</em></h2>
+    <p class="gline"><span class="stars" aria-hidden="true">★★★★★</span> <a href="[Google Business Profile link]" rel="noopener">[4.x] on Google, [38] reviews</a><br><span class="small">Owner reviews below, in their words, with permission.</span></p>
+  </div>
+  <div class="carousel">
+    <ul class="slides" tabindex="0" aria-live="polite">{items}</ul>
+    <div class="ctl"><button type="button" class="prev" aria-label="Previous review">←</button><div class="dots">{dots}</div><button type="button" class="next" aria-label="Next review">→</button></div>
+  </div>
 </div></section>
 '''
 

@@ -77,6 +77,18 @@
     nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { if (nav.classList.contains('open')) menu.click(); }); });
   }
 
+  // Owner review carousel: native scroll snap, buttons and dots just move it.
+  var car = document.querySelector('.carousel');
+  if (car) {
+    var track = car.querySelector('.slides'), slides = track.children, dots = car.querySelectorAll('.dots button');
+    var go = function (i) { i = (i + slides.length) % slides.length; track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); };
+    var cur = function () { return Math.round(track.scrollLeft / track.clientWidth); };
+    car.querySelector('.prev').addEventListener('click', function () { go(cur() - 1); });
+    car.querySelector('.next').addEventListener('click', function () { go(cur() + 1); });
+    dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); }); });
+    track.addEventListener('scroll', function () { var i = cur(); dots.forEach(function (d, k) { if (k === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); }); }, { passive: true });
+  }
+
   // One reveal per section heading.
   var rv = document.querySelectorAll('.rv');
   if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
