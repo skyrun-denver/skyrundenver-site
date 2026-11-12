@@ -31,26 +31,28 @@ def head(title, desc, path, extra=''):
 <a class="skip" href="#main">Skip to content</a>
 '''
 
-def header(current, dark=False):
+def header(current, dark=False, over=False):
     def a(href, label, key, quiet=False):
         cur = ' aria-current="page"' if key == current else ''
         q = ' class="quiet"' if quiet else ''
         return f'<a href="{href}"{cur}{q}>{label}</a>'
-    logo = 'skyrun-denver-horizontal-white.png' if dark else 'skyrun-denver-horizontal.png'
-    return f'''<header class="site-head{' dark' if dark else ''}"><div class="wrap">
-  <a class="logo" href="/" aria-label="SkyRun Denver home"><img src="/assets/img/{logo}" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"></a>
-  <nav class="nav" aria-label="Main">
+    cls = 'site-head' + (' dark' if dark else '') + (' over' if over else '')
+    return f"""<header class="{cls}" id="top"><div class="wrap">
+  <a class="logo" href="/" aria-label="SkyRun Denver home"><img class="lg-light" src="/assets/img/skyrun-denver-horizontal-white.png" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"><img class="lg-dark" src="/assets/img/skyrun-denver-horizontal.png" width="922" height="267" alt=""></a>
+  <nav class="nav" id="nav" aria-label="Main">
     {a('/#homes', 'Homes', 'homes')}
-    {a('/#statement', 'Your statement', 'statement')}
+    {a('/#month', 'A month with us', 'month')}
     {a('/#paths', 'Two ways to rent', 'paths')}
     {a('/operations', 'Operations', 'operations')}
     {a('/areas', 'Areas we serve', 'areas')}
     {a('#stay', 'Find a stay', 'stay', True)}
+    <a class="btn navcta" href="#evaluation">Request a property evaluation</a>
   </nav>
   <a class="btn{' sun' if dark else ''}" href="#evaluation">Request a property evaluation</a>
+  <button class="menu" type="button" aria-controls="nav" aria-expanded="false"><span></span><span></span>Menu</button>
 </div></header>
 <main id="main">
-'''
+"""
 
 def footer():
     return f'''</main>
@@ -98,7 +100,7 @@ def ask(page_label):
 def areas_table():
     rows = ''.join(f'<tr><td>{c}</td><td>[One verified line on {c}\'s short-term rental rules, with the date reviewed]</td><td><a href="#evaluation" data-city="{c}">Start in {c}</a></td></tr>' for c in CITIES)
     return f'''<section class="areas" id="areas"><div class="wrap">
-  <h2 class="word rv">Six cities.</h2>
+  <h2 class="word rv">Six <em class="acc">cities.</em></h2>
   <p class="lede" style="font-size:19px;line-height:1.5;max-width:46ch">Where we work, and what each one asks of you.</p>
   <table class="tbl"><tbody>{rows}
     <tr><td style="font-size:20px;color:var(--mute)">Somewhere else nearby</td><td>Ask. We will tell you straight whether we can cover it.</td><td><a href="#evaluation" data-city="Outside these cities">Ask us</a></td></tr>
@@ -144,7 +146,7 @@ def voice():
 
 def paths():
     return '''<section class="paths" id="paths"><div class="wrap">
-  <h2 class="word rv">Two ways.</h2>
+  <h2 class="word rv">Two <em class="acc">ways.</em></h2>
   <p class="lede" style="font-size:19px;line-height:1.5;max-width:46ch">Every home is different, and so are the rules in each city. The evaluation starts by working out which path fits yours, and one manager decides with you.</p>
   <div class="paths-ed">
     <div class="path rv d1"><div class="photo" data-label="Photo: a short stay home, staged and guest ready"></div><h3>Short stays</h3><p>Nightly and weekly guests on the major booking sites. Pricing reviewed against comparable Denver homes and moved for events and seasons. The full turn after every stay, run by StayReady.</p><p class="fit">A fit when the home qualifies for a short-term rental license and you want the higher turnover rhythm.</p></div>
@@ -154,20 +156,23 @@ def paths():
 '''
 
 def homes():
-    return '''<section class="homes" id="homes"><div class="wrap">
-  <h2 class="word rv">Homes.</h2>
-  <p class="lede" style="font-size:19px;line-height:1.5;max-width:46ch">A few of the homes we manage across the metro. [Real homes, with owner permission and licensed photos, replace these before launch.]</p>
-  <div class="grid">
-    <div class="rv"><div class="photo" data-label="Photo: featured managed home"></div><h3>[Home name]</h3><p>[Neighborhood, city] · [Bedrooms and baths] · Short stays</p></div>
-    <div class="rv d1"><div class="photo alt" data-label="Photo: managed home"></div><h3>[Home name]</h3><p>[Neighborhood, city] · Monthly stays</p></div>
-    <div class="rv d2"><div class="photo" data-label="Photo: managed home"></div><h3>[Home name]</h3><p>[Neighborhood, city] · Short stays</p></div>
-  </div>
-</div></section>
-'''
+    cards = [
+        ('Photo: featured managed home, exterior at golden hour', '[Home name]', '[Neighborhood, city] · [Bedrooms and baths] · Short stays'),
+        ('Photo: living room, morning light', '[Home name]', '[Neighborhood, city] · Monthly stays'),
+        ('Photo: kitchen, staged and guest ready', '[Home name]', '[Neighborhood, city] · Short stays'),
+        ('Photo: primary bedroom', '[Home name]', '[Neighborhood, city] · Monthly stays'),
+        ('Photo: back patio or yard', '[Home name]', '[Neighborhood, city] · Short stays'),
+    ]
+    items = ''.join(f'<figure class="card"><div class="photo{" alt" if i % 2 else ""}" data-label="{l}"></div><figcaption><h3>{n}</h3><p>{m}</p></figcaption></figure>' for i, (l, n, m) in enumerate(cards))
+    return f"""<section class="homes" id="homes">
+  <div class="wrap head"><h2 class="word rv">Homes.</h2><p class="lede" style="font-size:19px;line-height:1.5;max-width:46ch">A few of the homes we manage across the metro. [Real homes, with owner permission and licensed photos, replace these before launch.]</p><p class="hint small">Scroll sideways</p></div>
+  <div class="strip" tabindex="0" aria-label="Managed homes gallery">{items}</div>
+</section>
+"""
 
 def letter():
     return '''<section class="letter" id="letter"><div class="wrap">
-  <div><h2 class="word rv">From us.</h2><p class="lede" style="font-size:19px;line-height:1.5;max-width:40ch">What the relationship is, in plain words, from the person who runs it.</p><div class="photo alt" style="margin-top:28px" data-label="Photo: Sebastien and the Denver team"></div></div>
+  <div><h2 class="word rv">From <em class="acc">us.</em></h2><p class="lede" style="font-size:19px;line-height:1.5;max-width:40ch">What the relationship is, in plain words, from the person who runs it.</p><div class="photo alt" style="margin-top:28px" data-label="Photo: Sebastien and the Denver team"></div></div>
   <div class="card rv d1">
     <p>[Opening from Sebastien, in his own words: who he is, how long he has run the Denver location, and what he wants an owner to know before they call.]</p>
     <p>The evaluation is a walkthrough and a written plan. It covers which rental path fits your home, what setup is needed, how pricing is approached, what we handle and what you keep, and the rules your city applies. [Confirm whether a revenue estimate is included.]</p>
@@ -179,12 +184,24 @@ def letter():
 
 # ---------------- Home ----------------
 serving = ''.join(f'<span>{c}</span>' for c in CITIES)
+mq = ''.join(f'<span>{c}</span>' for c in CITIES * 3)
 home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denver Homeowners',
-            'SkyRun Denver manages short-term and furnished 30+ day rentals for homeowners in Denver, Arvada, Wheat Ridge, Lakewood, Englewood, and Centennial. Request a property evaluation.', '/') + header('home') + f'''
-<section class="hero"><div class="wrap">
+            'SkyRun Denver manages short-term and furnished 30+ day rentals for homeowners in Denver, Arvada, Wheat Ridge, Lakewood, Englewood, and Centennial. Request a property evaluation.', '/') + header('home', over=True) + f"""
+<section class="hero-photo">
+  <div class="photo rv" data-label="Photo: a managed Denver home at golden hour, full bleed, licensed and credited"></div>
+  <div class="wrap copy">
+    <p class="kicker">Short-term and furnished rental management, Denver metro</p>
+    <h1 class="disp">Every decision about your home, <em class="acc">made in the open.</em></h1>
+    <div class="acts"><a class="btn sun" href="#evaluation">Request a property evaluation</a><a class="btn glass" href="#month">See a month with us</a></div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="track">{mq}</div></div>
+
+<section class="hero month" id="month"><div class="wrap">
   <div class="hero-l">
     <p class="kicker">One owner. One home in Wash Park. One month.</p>
-    <h1 class="disp">This is what a month with us looks like.</h1>
+    <h2 class="disp sub">This is what a month with us <em class="acc">looks like.</em></h2>
     <p class="lede">SkyRun Denver manages short-term and furnished 30+ day rentals for homeowners across the Denver metro. Every pricing call, every guest, every decision, in your statement on the first.</p>
     <div class="acts"><a class="btn" href="#evaluation">Request a property evaluation</a><a class="btn ghost" href="#statement">See the owner statement</a></div>
     <p class="small" style="margin-top:36px"><strong style="color:var(--ink)">Serving</strong> {' · '.join(CITIES)}</p>
@@ -211,11 +228,11 @@ home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denv
   </div>
 </div></section>
 
-<section class="band"><div class="photo" data-label="Photo: a managed Denver home at golden hour, full width, licensed and credited"></div><p class="cap">[Caption: the home, the neighborhood, the photographer]</p></section>
+<section class="band"><div class="photo rv" data-label="Photo: the same home, interior, late afternoon, licensed and credited"></div><p class="cap">[Caption: the home, the neighborhood, the photographer]</p></section>
 
 <section class="record" id="statement"><div class="wrap">
   <div>
-    <h2 class="word rv">The first.</h2>
+    <h2 class="word rv">The <em class="acc">first.</em></h2>
     <p class="lede" style="margin-top:18px"><strong style="color:var(--ink)">Your statement, every month.</strong></p>
     <p class="lede">Not a payout and a line. What was booked, what we charged and why, every guest, every decision, and what we recommend for next month.</p>
     <p class="small" style="margin-top:20px">Counts only. Revenue and fee figures are never published on this site. [Confirm statement contents]</p>
@@ -232,7 +249,7 @@ home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denv
     <p class="note">Sample counts. Real statements replace these at launch.</p>
   </div>
 </div></section>
-''' + homes() + paths() + split() + letter() + areas_table() + voice() + ask('home') + footer()
+""" + homes() + paths() + split() + letter() + areas_table() + voice() + ask('home') + footer()
 (SITE / 'index.html').write_text(home)
 
 # ---------------- Operations ----------------
@@ -241,7 +258,7 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
 <section class="hero"><div class="wrap">
   <div class="hero-l">
     <p class="kicker">Operations. A Tuesday in Wash Park, checkout at 10:00, check in at 4:00.</p>
-    <h1 class="disp">Between guests, your home is StayReady's job.</h1>
+    <h1 class="disp">Between guests, your home is <em class="acc">StayReady's job.</em></h1>
     <p class="lede">SkyRun Denver manages the stay. StayReady, a Colorado hospitality field operations company, runs the work underneath it: cleaning, linens, restocking, inspections, maintenance, seasonal and exterior services, and property readiness. Here is one turn, hour by hour.</p>
     <div class="acts"><a class="btn" href="#evaluation">Request a property evaluation</a><a class="btn ghost" href="#record">See the owner record</a></div>
   </div>
@@ -259,11 +276,11 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
   </div></div>
 </div></section>
 
-<section class="band"><div class="photo" data-label="Photo: the StayReady crew at work in a Denver home, full width, licensed and credited"></div><p class="cap">[Caption: the home, the crew, the photographer]</p></section>
+<section class="band"><div class="photo rv" data-label="Photo: the StayReady crew at work in a Denver home, full width, licensed and credited"></div><p class="cap">[Caption: the home, the crew, the photographer]</p></section>
 
 <section class="record" id="record"><div class="wrap">
   <div>
-    <h2 class="word rv">The record.</h2>
+    <h2 class="word rv">The <em class="acc">record.</em></h2>
     <p class="lede" style="margin-top:18px"><strong style="color:var(--ink)">You see it after every stay.</strong></p>
     <p class="lede">Not a monthly summary. The actual checklist, photos, counts, and issues from each turnover, in your owner portal, the same day.</p>
     <p class="small" style="margin-top:20px">Portal and record format provided through StayReady's client portal. [Confirm what SkyRun Denver owners receive]</p>
@@ -290,7 +307,7 @@ areas = head('Areas We Serve | Denver, Arvada, Wheat Ridge, Lakewood, Englewood,
              'SkyRun Denver manages short-term and furnished rentals in Denver, Arvada, Wheat Ridge, Lakewood, Englewood, and Centennial. Each city has its own rules; the evaluation starts with yours.', '/areas') + header('areas', dark=True) + f'''
 <section class="maphero"><div class="wrap">
   <div>
-    <h1>Your home is on this map. <em>So are we.</em></h1>
+    <h1>Your home is on this map. <em class="acc">So are we.</em></h1>
     <p class="lede">Six Denver metro communities, each with its own short-term rental rules. Pick yours to start a property evaluation.</p>
     <p class="pickline" id="pl">Pick your community</p>
     <div class="chips" role="group" aria-labelledby="pl">{chips}<button class="chip" type="button" data-city="Outside these cities" aria-pressed="false">Somewhere else nearby</button></div>
@@ -363,7 +380,11 @@ thanks = head('Evaluation Requested | SkyRun Denver', 'Your property evaluation 
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Branch deploys and deploy previews never index. Production does.
+# Pre launch: production is noindexed too. Remove the production block at launch (Round 6).
+[context.production]
+  command = "printf '/*\\n  X-Robots-Tag: noindex\\n' >> _headers"
+
+# Branch deploys and deploy previews never index.
 [context.deploy-preview]
   command = "printf '/*\\n  X-Robots-Tag: noindex\\n' >> _headers"
 [context.branch-deploy]
@@ -383,6 +404,8 @@ thanks = head('Evaluation Requested | SkyRun Denver', 'Your property evaluation 
 </urlset>
 ''')
 (SITE / 'README.md').write_text('''# skyrundenver.com
+
+v0.3 (2026-11-12): photo led hero, italic serif accents, city marquee, horizontal homes gallery, transparent header over the hero, mobile menu.
 
 v0.2 (2026-11-11): warmer ground, hairline rules, Homes gallery, editorial two paths, letter from Sebastien, one word section titles.
 

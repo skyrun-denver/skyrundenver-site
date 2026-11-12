@@ -21,23 +21,25 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-head dark"><div class="wrap">
-  <a class="logo" href="/" aria-label="SkyRun Denver home"><img src="/assets/img/skyrun-denver-horizontal-white.png" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"></a>
-  <nav class="nav" aria-label="Main">
+<header class="site-head dark" id="top"><div class="wrap">
+  <a class="logo" href="/" aria-label="SkyRun Denver home"><img class="lg-light" src="/assets/img/skyrun-denver-horizontal-white.png" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"><img class="lg-dark" src="/assets/img/skyrun-denver-horizontal.png" width="922" height="267" alt=""></a>
+  <nav class="nav" id="nav" aria-label="Main">
     <a href="/#homes">Homes</a>
-    <a href="/#statement">Your statement</a>
+    <a href="/#month">A month with us</a>
     <a href="/#paths">Two ways to rent</a>
     <a href="/operations">Operations</a>
     <a href="/areas" aria-current="page">Areas we serve</a>
     <a href="#stay" class="quiet">Find a stay</a>
+    <a class="btn navcta" href="#evaluation">Request a property evaluation</a>
   </nav>
   <a class="btn sun" href="#evaluation">Request a property evaluation</a>
+  <button class="menu" type="button" aria-controls="nav" aria-expanded="false"><span></span><span></span>Menu</button>
 </div></header>
 <main id="main">
 
 <section class="maphero"><div class="wrap">
   <div>
-    <h1>Your home is on this map. <em>So are we.</em></h1>
+    <h1>Your home is on this map. <em class="acc">So are we.</em></h1>
     <p class="lede">Six Denver metro communities, each with its own short-term rental rules. Pick yours to start a property evaluation.</p>
     <p class="pickline" id="pl">Pick your community</p>
     <div class="chips" role="group" aria-labelledby="pl"><button class="chip" type="button" data-city="Denver" aria-pressed="false">Denver</button><button class="chip" type="button" data-city="Arvada" aria-pressed="false">Arvada</button><button class="chip" type="button" data-city="Wheat Ridge" aria-pressed="false">Wheat Ridge</button><button class="chip" type="button" data-city="Lakewood" aria-pressed="false">Lakewood</button><button class="chip" type="button" data-city="Englewood" aria-pressed="false">Englewood</button><button class="chip" type="button" data-city="Centennial" aria-pressed="false">Centennial</button><button class="chip" type="button" data-city="Outside these cities" aria-pressed="false">Somewhere else nearby</button></div>

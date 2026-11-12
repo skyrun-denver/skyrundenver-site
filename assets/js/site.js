@@ -1,4 +1,4 @@
-/* SkyRun Denver site script. v0.1. No dependencies. */
+/* SkyRun Denver site script. v0.3. No dependencies. */
 (function () {
   'use strict';
 
@@ -51,16 +51,37 @@
   if (citySel) citySel.addEventListener('change', function () { if (citySel.value) setCity(citySel.value, false); });
 
   // Phone CTA hides when the form is on screen.
-  var m = document.querySelector('.mcta'), t = document.getElementById('evaluation');
-  if (m && t && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (e) { m.style.visibility = e[0].isIntersecting ? 'hidden' : 'visible'; }, { threshold: 0.05 }).observe(t);
+  var m = document.querySelector('.mcta'), t = document.getElementById('evaluation'), hp = document.querySelector('.hero-photo');
+  if (m && 'IntersectionObserver' in window) {
+    var hide = { form: false, hero: false };
+    var apply = function () { m.style.visibility = (hide.form || hide.hero) ? 'hidden' : 'visible'; };
+    if (t) new IntersectionObserver(function (e) { hide.form = e[0].isIntersecting; apply(); }, { threshold: 0.05 }).observe(t);
+    if (hp) new IntersectionObserver(function (e) { hide.hero = e[0].isIntersecting; apply(); }, { threshold: 0.15 }).observe(hp);
+  }
+
+
+  // Header over the photo hero turns solid once the hero scrolls away. Mobile menu toggle.
+  var head = document.querySelector('.site-head');
+  if (head && head.classList.contains('over')) {
+    var onScroll = function () { head.classList.toggle('solid', window.scrollY > 40); };
+    onScroll(); addEventListener('scroll', onScroll, { passive: true });
+  }
+  var menu = document.querySelector('.menu'), nav = document.getElementById('nav');
+  if (menu && nav) {
+    menu.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      menu.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (head) head.classList.toggle('solid', open || window.scrollY > 40);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { if (nav.classList.contains('open')) menu.click(); }); });
   }
 
   // One reveal per section heading.
   var rv = document.querySelectorAll('.rv');
   if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     var io = new IntersectionObserver(function (entries) { entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }); }, { threshold: 0.3 });
-    rv.forEach(function (el) { io.observe(el); });
+    rv.forEach(function (el) { if (el.closest('.hero-photo')) { requestAnimationFrame(function(){ el.classList.add('in'); }); } else { io.observe(el); } });
   } else {
     rv.forEach(function (el) { el.classList.add('in'); });
   }

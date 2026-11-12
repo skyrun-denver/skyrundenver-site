@@ -21,24 +21,37 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-head"><div class="wrap">
-  <a class="logo" href="/" aria-label="SkyRun Denver home"><img src="/assets/img/skyrun-denver-horizontal.png" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"></a>
-  <nav class="nav" aria-label="Main">
+<header class="site-head over" id="top"><div class="wrap">
+  <a class="logo" href="/" aria-label="SkyRun Denver home"><img class="lg-light" src="/assets/img/skyrun-denver-horizontal-white.png" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"><img class="lg-dark" src="/assets/img/skyrun-denver-horizontal.png" width="922" height="267" alt=""></a>
+  <nav class="nav" id="nav" aria-label="Main">
     <a href="/#homes">Homes</a>
-    <a href="/#statement">Your statement</a>
+    <a href="/#month">A month with us</a>
     <a href="/#paths">Two ways to rent</a>
     <a href="/operations">Operations</a>
     <a href="/areas">Areas we serve</a>
     <a href="#stay" class="quiet">Find a stay</a>
+    <a class="btn navcta" href="#evaluation">Request a property evaluation</a>
   </nav>
   <a class="btn" href="#evaluation">Request a property evaluation</a>
+  <button class="menu" type="button" aria-controls="nav" aria-expanded="false"><span></span><span></span>Menu</button>
 </div></header>
 <main id="main">
 
-<section class="hero"><div class="wrap">
+<section class="hero-photo">
+  <div class="photo rv" data-label="Photo: a managed Denver home at golden hour, full bleed, licensed and credited"></div>
+  <div class="wrap copy">
+    <p class="kicker">Short-term and furnished rental management, Denver metro</p>
+    <h1 class="disp">Every decision about your home, <em class="acc">made in the open.</em></h1>
+    <div class="acts"><a class="btn sun" href="#evaluation">Request a property evaluation</a><a class="btn glass" href="#month">See a month with us</a></div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="track"><span>Denver</span><span>Arvada</span><span>Wheat Ridge</span><span>Lakewood</span><span>Englewood</span><span>Centennial</span><span>Denver</span><span>Arvada</span><span>Wheat Ridge</span><span>Lakewood</span><span>Englewood</span><span>Centennial</span><span>Denver</span><span>Arvada</span><span>Wheat Ridge</span><span>Lakewood</span><span>Englewood</span><span>Centennial</span></div></div>
+
+<section class="hero month" id="month"><div class="wrap">
   <div class="hero-l">
     <p class="kicker">One owner. One home in Wash Park. One month.</p>
-    <h1 class="disp">This is what a month with us looks like.</h1>
+    <h2 class="disp sub">This is what a month with us <em class="acc">looks like.</em></h2>
     <p class="lede">SkyRun Denver manages short-term and furnished 30+ day rentals for homeowners across the Denver metro. Every pricing call, every guest, every decision, in your statement on the first.</p>
     <div class="acts"><a class="btn" href="#evaluation">Request a property evaluation</a><a class="btn ghost" href="#statement">See the owner statement</a></div>
     <p class="small" style="margin-top:36px"><strong style="color:var(--ink)">Serving</strong> Denver · Arvada · Wheat Ridge · Lakewood · Englewood · Centennial</p>
@@ -65,11 +78,11 @@
   </div>
 </div></section>
 
-<section class="band"><div class="photo" data-label="Photo: a managed Denver home at golden hour, full width, licensed and credited"></div><p class="cap">[Caption: the home, the neighborhood, the photographer]</p></section>
+<section class="band"><div class="photo rv" data-label="Photo: the same home, interior, late afternoon, licensed and credited"></div><p class="cap">[Caption: the home, the neighborhood, the photographer]</p></section>
 
 <section class="record" id="statement"><div class="wrap">
   <div>
-    <h2 class="word rv">The first.</h2>
+    <h2 class="word rv">The <em class="acc">first.</em></h2>
     <p class="lede" style="margin-top:18px"><strong style="color:var(--ink)">Your statement, every month.</strong></p>
     <p class="lede">Not a payout and a line. What was booked, what we charged and why, every guest, every decision, and what we recommend for next month.</p>
     <p class="small" style="margin-top:20px">Counts only. Revenue and fee figures are never published on this site. [Confirm statement contents]</p>
@@ -86,17 +99,12 @@
     <p class="note">Sample counts. Real statements replace these at launch.</p>
   </div>
 </div></section>
-<section class="homes" id="homes"><div class="wrap">
-  <h2 class="word rv">Homes.</h2>
-  <p class="lede" style="font-size:19px;line-height:1.5;max-width:46ch">A few of the homes we manage across the metro. [Real homes, with owner permission and licensed photos, replace these before launch.]</p>
-  <div class="grid">
-    <div class="rv"><div class="photo" data-label="Photo: featured managed home"></div><h3>[Home name]</h3><p>[Neighborhood, city] · [Bedrooms and baths] · Short stays</p></div>
-    <div class="rv d1"><div class="photo alt" data-label="Photo: managed home"></div><h3>[Home name]</h3><p>[Neighborhood, city] · Monthly stays</p></div>
-    <div class="rv d2"><div class="photo" data-label="Photo: managed home"></div><h3>[Home name]</h3><p>[Neighborhood, city] · Short stays</p></div>
-  </div>
-</div></section>
+<section class="homes" id="homes">
+  <div class="wrap head"><h2 class="word rv">Homes.</h2><p class="lede" style="font-size:19px;line-height:1.5;max-width:46ch">A few of the homes we manage across the metro. [Real homes, with owner permission and licensed photos, replace these before launch.]</p><p class="hint small">Scroll sideways</p></div>
+  <div class="strip" tabindex="0" aria-label="Managed homes gallery"><figure class="card"><div class="photo" data-label="Photo: featured managed home, exterior at golden hour"></div><figcaption><h3>[Home name]</h3><p>[Neighborhood, city] · [Bedrooms and baths] · Short stays</p></figcaption></figure><figure class="card"><div class="photo alt" data-label="Photo: living room, morning light"></div><figcaption><h3>[Home name]</h3><p>[Neighborhood, city] · Monthly stays</p></figcaption></figure><figure class="card"><div class="photo" data-label="Photo: kitchen, staged and guest ready"></div><figcaption><h3>[Home name]</h3><p>[Neighborhood, city] · Short stays</p></figcaption></figure><figure class="card"><div class="photo alt" data-label="Photo: primary bedroom"></div><figcaption><h3>[Home name]</h3><p>[Neighborhood, city] · Monthly stays</p></figcaption></figure><figure class="card"><div class="photo" data-label="Photo: back patio or yard"></div><figcaption><h3>[Home name]</h3><p>[Neighborhood, city] · Short stays</p></figcaption></figure></div>
+</section>
 <section class="paths" id="paths"><div class="wrap">
-  <h2 class="word rv">Two ways.</h2>
+  <h2 class="word rv">Two <em class="acc">ways.</em></h2>
   <p class="lede" style="font-size:19px;line-height:1.5;max-width:46ch">Every home is different, and so are the rules in each city. The evaluation starts by working out which path fits yours, and one manager decides with you.</p>
   <div class="paths-ed">
     <div class="path rv d1"><div class="photo" data-label="Photo: a short stay home, staged and guest ready"></div><h3>Short stays</h3><p>Nightly and weekly guests on the major booking sites. Pricing reviewed against comparable Denver homes and moved for events and seasons. The full turn after every stay, run by StayReady.</p><p class="fit">A fit when the home qualifies for a short-term rental license and you want the higher turnover rhythm.</p></div>
@@ -129,7 +137,7 @@
   </div>
 </div></section>
 <section class="letter" id="letter"><div class="wrap">
-  <div><h2 class="word rv">From us.</h2><p class="lede" style="font-size:19px;line-height:1.5;max-width:40ch">What the relationship is, in plain words, from the person who runs it.</p><div class="photo alt" style="margin-top:28px" data-label="Photo: Sebastien and the Denver team"></div></div>
+  <div><h2 class="word rv">From <em class="acc">us.</em></h2><p class="lede" style="font-size:19px;line-height:1.5;max-width:40ch">What the relationship is, in plain words, from the person who runs it.</p><div class="photo alt" style="margin-top:28px" data-label="Photo: Sebastien and the Denver team"></div></div>
   <div class="card rv d1">
     <p>[Opening from Sebastien, in his own words: who he is, how long he has run the Denver location, and what he wants an owner to know before they call.]</p>
     <p>The evaluation is a walkthrough and a written plan. It covers which rental path fits your home, what setup is needed, how pricing is approached, what we handle and what you keep, and the rules your city applies. [Confirm whether a revenue estimate is included.]</p>
@@ -138,7 +146,7 @@
   </div>
 </div></section>
 <section class="areas" id="areas"><div class="wrap">
-  <h2 class="word rv">Six cities.</h2>
+  <h2 class="word rv">Six <em class="acc">cities.</em></h2>
   <p class="lede" style="font-size:19px;line-height:1.5;max-width:46ch">Where we work, and what each one asks of you.</p>
   <table class="tbl"><tbody><tr><td>Denver</td><td>[One verified line on Denver's short-term rental rules, with the date reviewed]</td><td><a href="#evaluation" data-city="Denver">Start in Denver</a></td></tr><tr><td>Arvada</td><td>[One verified line on Arvada's short-term rental rules, with the date reviewed]</td><td><a href="#evaluation" data-city="Arvada">Start in Arvada</a></td></tr><tr><td>Wheat Ridge</td><td>[One verified line on Wheat Ridge's short-term rental rules, with the date reviewed]</td><td><a href="#evaluation" data-city="Wheat Ridge">Start in Wheat Ridge</a></td></tr><tr><td>Lakewood</td><td>[One verified line on Lakewood's short-term rental rules, with the date reviewed]</td><td><a href="#evaluation" data-city="Lakewood">Start in Lakewood</a></td></tr><tr><td>Englewood</td><td>[One verified line on Englewood's short-term rental rules, with the date reviewed]</td><td><a href="#evaluation" data-city="Englewood">Start in Englewood</a></td></tr><tr><td>Centennial</td><td>[One verified line on Centennial's short-term rental rules, with the date reviewed]</td><td><a href="#evaluation" data-city="Centennial">Start in Centennial</a></td></tr>
     <tr><td style="font-size:20px;color:var(--mute)">Somewhere else nearby</td><td>Ask. We will tell you straight whether we can cover it.</td><td><a href="#evaluation" data-city="Outside these cities">Ask us</a></td></tr>
