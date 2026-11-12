@@ -3,6 +3,18 @@
 import sys, pathlib
 SITE = pathlib.Path(sys.argv[1])
 CITIES = ['Denver', 'Arvada', 'Wheat Ridge', 'Lakewood', 'Englewood', 'Centennial']
+
+# City rules. Drafted 2026-11-12 from each city's own pages; pending SkyRun Denver sign off (the [Draft] tag comes off on sign off).
+RULES_REVIEWED = 'November 12, 2026'
+RULES_TAG = '[Draft, pending SkyRun Denver sign off]'
+RULES = {
+    'Denver': ('A short-term rental license covers stays of 29 nights or fewer and requires the home to be the host\'s primary residence. Stays of 30 nights or more fall under the residential rental property license instead.', 'https://denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Business-Licensing/Business-licenses/Short-term-rentals'),
+    'Arvada': ('Short-term rentals are licensed by the city, up to three licenses per person at $350 a year. A 2026 proposal would limit owners to one license and add enforcement, with a council hearing still to come.', 'https://speakup.arvadaco.gov/short-term-rentals'),
+    'Wheat Ridge': ('Licensed since 2021. Owner occupied partial home rentals are not capped. Whole home rentals are capped at 2 percent of homes per council district, with waitlists in three of four districts, and a 10 percent lodgers\' tax applies.', 'https://co-wheatridge3.civicplus.com/STR'),
+    'Lakewood': ('Licensed since May 2023 and limited to the owner\'s primary residence, with proof of residence, $500,000 liability coverage with a short-term rental endorsement, a third party inspection, and certified notice to neighbors. $150 new, $75 renewal.', 'https://www.lakewoodco.gov/City-Hall/Departments/City-Clerks-Office/CCO-services-permits-registrations/Short-Term-Rental-License'),
+    'Englewood': ('Stays under 30 nights need a license and an annual inspection, and the home must be an owner\'s primary residence, 185 days a year, unless the board grants a waiver. City sales tax of 3.8 percent and lodger\'s tax of 2 percent apply.', 'https://englewoodco.gov/government/city-departments/community-development/short-term-rentals-new/frequently-asked-questions-about-short-term-rentals'),
+    'Centennial': ('Every short-term rental under 30 nights needs a city license, $150 a year plus a $50 application fee, liability insurance, two off street parking spaces, and occupancy of two per bedroom up to eight. The city pages state no primary residence requirement.', 'https://centennialco.gov/Residents/Living-Here/Short-Term-Rental'),
+}
 ORIGIN = 'https://skyrundenver.com'
 
 def head(title, desc, path, extra=''):
@@ -98,7 +110,7 @@ def ask(page_label):
 '''
 
 def areas_table():
-    rows = ''.join(f'<tr><td>{c}</td><td>[One verified line on {c}\'s short-term rental rules, with the date reviewed]</td><td><a href="#evaluation" data-city="{c}">Start in {c}</a></td></tr>' for c in CITIES)
+    rows = ''.join(f'<tr><td>{c}</td><td>{RULES[c][0]} <span class="small">Reviewed {RULES_REVIEWED}. {RULES_TAG}</span></td><td><a href="#evaluation" data-city="{c}">Start in {c}</a></td></tr>' for c in CITIES)
     return f'''<section class="areas" id="areas"><div class="wrap">
   <h2 class="word rv">Six <em class="acc">cities.</em></h2>
   <p class="lede" style="font-size:19px;line-height:1.5;max-width:46ch">Where we work, and what each one asks of you.</p>
@@ -321,13 +333,13 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
 
 # ---------------- Areas ----------------
 chips = ''.join(f'<button class="chip" type="button" data-city="{c}" aria-pressed="false">{c}</button>' for c in CITIES)
-rules = ''.join(f'<li><b>{c}<small>Reviewed [date]</small></b><p>[One verified line on {c}\'s short-term rental rules, from the current city code.] <a href="#evaluation" data-city="{c}">Start in {c}</a></p></li>' for c in CITIES)
+rules = ''.join(f'<li><b>{c}<small>Reviewed {RULES_REVIEWED}</small></b><p>{RULES[c][0]} <a href="{RULES[c][1]}" rel="noopener" class="src">City source</a>. <a href="#evaluation" data-city="{c}">Start in {c}</a></p><p class="small pend">{RULES_TAG}</p></li>' for c in CITIES)
 areas = head('Areas We Serve | Denver, Arvada, Wheat Ridge, Lakewood, Englewood, Centennial | SkyRun Denver',
              'SkyRun Denver manages short-term and furnished rentals in Denver, Arvada, Wheat Ridge, Lakewood, Englewood, and Centennial. Each city has its own rules; the evaluation starts with yours.', '/areas') + header('areas', dark=True) + f'''
 <section class="maphero"><div class="wrap">
   <div>
     <h1>Your home is on this map. <em class="acc">So are we.</em></h1>
-    <p class="lede">Six Denver metro communities, each with its own short-term rental rules. Pick yours to start a property evaluation.</p>
+    <p class="lede">Six Denver metro communities, each with its own short-term rental rules. In Denver, Lakewood, and Englewood a home that is not your primary residence cannot be licensed for short stays, which is where a furnished 30 night stay earns its place. Pick your community to start a property evaluation.</p>
     <p class="pickline" id="pl">Pick your community</p>
     <div class="chips" role="group" aria-labelledby="pl">{chips}<button class="chip" type="button" data-city="Outside these cities" aria-pressed="false">Somewhere else nearby</button></div>
   </div>
