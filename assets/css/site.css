@@ -377,3 +377,22 @@ form.eval .btn{grid-column:1/-1;width:100%;min-height:60px;font-size:18px;margin
   .strip .card:first-child .photo{aspect-ratio:4/5}
 }
 @media (prefers-reduced-motion:reduce){.marquee .track{animation:none}.hero-photo .photo,.band .photo.rv{transform:none;opacity:1;transition:none}}
+
+/* v0.3b: calendar focused on short stays, turns, service visits, inspections; 30 night stay runs past the month */
+.d{overflow:hidden}
+.d em{position:absolute;left:5px;bottom:14px;font-style:normal;font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);line-height:1}
+.d.t{background:var(--cream)}
+.d.t::after{background:var(--sun);opacity:1}
+.d.t.i::after{background:var(--leaf)}
+.d.s::before{content:attr(data-n)}
+.d.s:not(.n)::before{content:"";width:8px;height:8px;background:var(--sky);border-radius:50%;right:6px;top:6px}
+.d.s .em{color:var(--sky)}
+.d.m em{color:var(--sky-ink)}
+.d.nx{background:var(--sand);color:var(--mute);font-weight:500}
+.d.nx::after{background:var(--sky);opacity:.55}
+.d.more::after{right:-4px;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 50%,calc(100% - 6px) 100%,0 100%)}
+.d.more em{color:var(--sky-ink)}
+.keyrow i.t{background:var(--sun);opacity:1}
+.keyrow i.s{width:8px;height:8px;border-radius:50%;background:var(--sky)}
+.keyrow i.i{background:var(--leaf)}
+@media (max-width:640px){.d em{display:none}.d.nx{font-size:10px}}
