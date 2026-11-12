@@ -109,8 +109,9 @@ def areas_table():
 </div></section>
 '''
 
-def split():
-    return '''<section class="split" id="ops"><div class="wrap">
+def split(page='home'):
+    panel = '<a href="https://www.gostayready.com/denver" rel="noopener">StayReady in Denver</a>' if page == 'operations' else '<a href="https://www.gostayready.com/" rel="noopener">About StayReady</a>'
+    return f'''<section class="split" id="ops"><div class="wrap">
   <div class="col">
     <h3>Managed by SkyRun Denver</h3>
     <ul>
@@ -122,17 +123,17 @@ def split():
     <p class="part">An independently owned SkyRun Vacation Rentals location. [Corporate wording pending]</p>
   </div>
   <div class="col">
-    <h3>Operated by StayReady</h3>
+    <h3>Field operations by StayReady</h3>
     <p style="margin:0 0 16px;font-size:15px;color:var(--mute)">The field work between guests, on one accountable record. <a href="/operations" style="color:var(--sky-ink)">See a turnover, hour by hour</a></p>
     <ul>
-      <li><b>Cleaning.</b> Turnover readiness, eight zones, every stay.</li>
+      <li><b>Cleaning.</b> The 100+ point turnover checklist across eight zones, every stay.</li>
       <li><b>Linens.</b> A managed linen program, swapped per turn.</li>
       <li><b>Restocking.</b> Supplies to par, counted and logged.</li>
-      <li><b>Inspections.</b> 100+ points, photographed.</li>
+      <li><b>Inspections.</b> Every room, photographed.</li>
       <li><b>Maintenance.</b> Repairs dispatched, documented, closed.</li>
       <li><b>Seasonal and exterior.</b> Snow, lawn, irrigation, hot tubs. [Confirm]</li>
     </ul>
-    <p class="part">StayReady is the hospitality field operations partner behind the SkyRun Denver portfolio. <a href="https://www.gostayready.com" rel="noopener">About StayReady</a></p>
+    <p class="part">StayReady is the hospitality field operations partner behind the SkyRun Denver portfolio. {panel}</p>
   </div>
 </div></section>
 '''
@@ -232,7 +233,7 @@ home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denv
     <p class="keyrow"><span><i></i>Short stay booked</span><span><i class="t"></i>Turnover: clean, linens, restock, inspection</span><span><i class="s"></i>Service visit</span><span><i class="i"></i>Inspection found and fixed</span><span><i class="m"></i>Furnished stay, 30 nights, Nov 24 to Dec 23</span><span>Numbered: a decision below</span></p>
     <div class="ledger">
       <div class="row"><span class="t">1</span><div><h3>Statement sent for October</h3><p>Nights, guests, every charge itemized, what we decided and why. Payout on its way.</p></div><span class="who">Owner relations</span></div>
-      <div class="row"><span class="t">3</span><div><h3>First turn of the month</h3><p>Checkout at 10, cleaning crew at 10:40, fresh linens, restocked to par, 100+ point inspection with photos. Guest ready by 3:10 for a 4:00 check in. <a href="/operations" style="color:var(--sky-ink)">See the whole turn</a>.</p><div class="photo" data-label="Photo: the home, guest ready"></div></div><span class="who">Operations, by StayReady</span></div>
+      <div class="row"><span class="t">3</span><div><h3>First turn of the month</h3><p>Checkout at 10, cleaning crew at 10:40, fresh linens, restocked to par, the 100+ point turnover checklist, inspection with photos. Guest ready by 3:10 for a 4:00 check in. <a href="/operations" style="color:var(--sky-ink)">See the whole turn</a>.</p><div class="photo" data-label="Photo: the home, guest ready"></div></div><span class="who">Operations, by StayReady</span></div>
       <div class="row"><span class="t">8</span><div><h3>Rate raised for a Broncos home weekend</h3><p>Comparable Wash Park homes checked that morning. Two nights repriced, both booked.</p></div><span class="who">Pricing</span></div>
       <div class="row"><span class="t">12</span><div><h3>Service visit between guests</h3><p>Furnace filter, smoke and CO detectors, water heater check. Photos and counts on your record. [Confirm the standing service visit scope]</p></div><span class="who">Maintenance, by StayReady</span></div>
       <div class="row"><span class="t">16</span><div><h3>Inspection flagged a loose bath fan, fixed the same turn</h3><p>Found at 1:40, tightened by 2:30, before and after photos attached. The next guest never knew.</p><div class="photo alt" data-label="Photo: the inspection"></div></div><span class="who">Inspection and maintenance, by StayReady</span></div>
@@ -274,16 +275,16 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
   <div class="hero-l">
     <p class="kicker">Operations. A Tuesday in Wash Park, checkout at 10:00, check in at 4:00.</p>
     <h1 class="disp">Between guests, your home is <em class="acc">StayReady's job.</em></h1>
-    <p class="lede">SkyRun Denver manages the stay. StayReady, a Colorado hospitality field operations company, runs the work underneath it: cleaning, linens, restocking, inspections, maintenance, seasonal and exterior services, and property readiness. Here is one turn, hour by hour.</p>
+    <p class="lede">SkyRun Denver manages the stay. StayReady, the <a href="https://www.gostayready.com/hospitality-field-operations" rel="noopener">hospitality field operations company</a> based here in Colorado, runs the work underneath it: cleaning, linens, restocking, inspections, maintenance, seasonal and exterior services, and property readiness. Here is one turn, hour by hour.</p>
     <div class="acts"><a class="btn" href="#evaluation">Request a property evaluation</a><a class="btn ghost" href="#record">See the owner record</a></div>
   </div>
   <div class="cal" aria-label="One turnover, hour by hour"><div class="ledger">
     <div class="head"><span>Time</span><span>What happened</span><span style="text-align:right">Who</span></div>
     <div class="row"><span class="t big">10:00</span><div><h3>Guests check out</h3><p>Smart lock code expires. Checkout photos requested from the guest.</p></div><span class="who">SkyRun Denver</span></div>
-    <div class="row"><span class="t big">10:40</span><div><h3>Cleaning team arrives</h3><p>Two person crew. Kitchen, baths, floors, every surface in eight zones.</p><div class="photo" data-label="Photo: crew arrival"></div></div><span class="who">StayReady cleaning</span></div>
+    <div class="row"><span class="t big">10:40</span><div><h3>Cleaning team arrives</h3><p>Two person crew working the <a href="https://www.gostayready.com/turnover-cleaning" rel="noopener">100+ point turnover checklist</a> across eight zones: kitchen, baths, floors, every surface.</p><div class="photo" data-label="Photo: crew arrival"></div></div><span class="who">StayReady cleaning</span></div>
     <div class="row"><span class="t big">12:15</span><div><h3>Linens swapped, not washed onsite</h3><p>Fresh set from the linen program. Used set bagged for the laundry route.</p></div><span class="who">StayReady linens</span></div>
     <div class="row"><span class="t big">1:05</span><div><h3>Restocked to par</h3><p>Paper, soap, coffee, dish pods. Counts logged against the home's par list.</p></div><span class="who">StayReady restocking</span></div>
-    <div class="row"><span class="t big">1:40</span><div><h3>Inspection, 100+ points</h3><p>Appliances, fixtures, locks, thermostat, staging. Loose bath fan noted and sent to maintenance.</p><div class="photo alt" data-label="Photo: inspection"></div></div><span class="who">StayReady inspection</span></div>
+    <div class="row"><span class="t big">1:40</span><div><h3>Inspection, every room</h3><p>A <a href="https://www.gostayready.com/inspections" rel="noopener">readiness inspection</a>: appliances, fixtures, locks, thermostat, staging. Loose bath fan noted and sent to maintenance.</p><div class="photo alt" data-label="Photo: inspection"></div></div><span class="who">StayReady inspection</span></div>
     <div class="row"><span class="t big">2:30</span><div><h3>Bath fan tightened</h3><p>Same day. Before and after photos attached to the home's record.</p></div><span class="who">StayReady maintenance</span></div>
     <div class="row"><span class="t big now">3:10</span><div><h3>Guest ready</h3><p>Record closed. You can see every step, photo, and count in your owner portal.</p></div><span class="who">SkyRun Denver</span></div>
     <div class="row"><span class="t big">4:00</span><div><h3>Next guests check in</h3><p>New lock code live. Welcome message sent.</p></div><span class="who">SkyRun Denver</span></div>
@@ -312,7 +313,7 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
     <p class="note">Sample figures. Real records replace these at launch.</p>
   </div>
 </div></section>
-''' + split() + ask('operations') + footer()
+''' + split('operations') + ask('operations') + footer()
 (SITE / 'operations.html').write_text(ops.replace('<section class="band">', '<section class="band">', 1))
 
 # ---------------- Areas ----------------
