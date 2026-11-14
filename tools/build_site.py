@@ -17,7 +17,7 @@ RULES_REVIEWED = 'November 12, 2026'
 RULES_TAG = '[Draft, pending SkyRun Denver sign off]'
 RULES = {
     'Denver': ('A short-term rental license covers stays of 29 nights or fewer and requires the home to be the host\'s primary residence. Stays of 30 nights or more fall under the residential rental property license instead.', 'https://denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Business-Licensing/Business-licenses/Short-term-rentals'),
-    'Arvada': ('Short-term rentals are licensed by the city, up to three licenses per person at $350 a year. A 2026 proposal would limit owners to one license and add enforcement, with a council hearing still to come.', 'https://speakup.arvadaco.gov/short-term-rentals'),
+    'Arvada': ('A short-term rental permit and a city business license are both required. Under rules in effect since May 1, 2026, one permit is allowed per lot (the main home or an accessory unit, not both), occupancy is two per bedroom plus two, and a home may operate up to 240 days in any 365.', 'https://www.arvadaco.gov/1507/Operating-a-short-term-rental'),
     'Wheat Ridge': ('Licensed since 2021. Owner occupied partial home rentals are not capped. Whole home rentals are capped at 2 percent of homes per council district, with waitlists in three of four districts, and a 10 percent lodgers\' tax applies.', 'https://co-wheatridge3.civicplus.com/STR'),
     'Lakewood': ('Licensed since May 2023 and limited to the owner\'s primary residence, with proof of residence, $500,000 liability coverage with a short-term rental endorsement, a third party inspection, and certified notice to neighbors. $150 new, $75 renewal.', 'https://www.lakewoodco.gov/City-Hall/Departments/City-Clerks-Office/CCO-services-permits-registrations/Short-Term-Rental-License'),
     'Englewood': ('Stays under 30 nights need a license and an annual inspection, and the home must be an owner\'s primary residence, 185 days a year, unless the board grants a waiver. City sales tax of 3.8 percent and lodger\'s tax of 2 percent apply.', 'https://englewoodco.gov/government/city-departments/community-development/short-term-rentals-new/frequently-asked-questions-about-short-term-rentals'),
@@ -78,7 +78,7 @@ def footer():
     return f'''</main>
 <footer class="site-foot"><div class="wrap">
   <div><a class="logo" href="/"><img src="/assets/img/skyrun-denver-horizontal.png" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"></a><p class="pend" style="margin-top:12px">SkyRun Denver is an independently owned and operated SkyRun Vacation Rentals location. [Working wording; corporate approved disclosure pending]</p></div>
-  <div><h4>Contact</h4><p><a href="tel:+17207281997">720-728-1997</a></p><p><a href="mailto:denver@skyrun.com">denver@skyrun.com</a></p><p>Locally operated, serving Denver, Arvada, Wheat Ridge, Lakewood, Englewood and Centennial.</p></div>
+  <div><h4>Contact</h4><p><a href="tel:+17207281997">720-728-1997</a></p><p><a href="mailto:denver@skyrun.com">denver@skyrun.com</a></p><p>Locally owned and operated. Serving Denver, Arvada, Wheat Ridge, Lakewood, Englewood and Centennial.</p></div>
   <div><h4>Homeowners</h4><p><a href="/#paths">Two ways to rent</a></p><p><a href="/operations">Operations</a></p><p><a href="/areas">Areas we serve</a></p><p><a href="/#evaluation">Request a property evaluation</a></p></div>
   <div><h4>Guests and owners</h4><p><a href="https://skyrun.com/denver/" rel="noopener">Find a stay</a></p><p><a href="https://skyrundenver.trackhs.com/owner/" rel="noopener">Owner login</a></p><p><a href="https://skyrun.com/privacy-policy/" rel="noopener">Privacy</a></p></div>
 </div></footer>
@@ -111,7 +111,7 @@ def ask(page_label):
     return f'''<section class="ask" id="evaluation"><div class="wrap">
   <div>
     <h2 class="h2 rv" id="ft">Request a property evaluation.</h2>
-    <p class="lede">We walk the home, read your city's rules, and tell you which path fits, or whether neither does. No cost, no commitment.</p>
+    <p class="lede">We walk the home, read your city's rules, and tell you which path fits, or whether neither does. You get a written recommendation for your home, with revenue ranges only where the data supports them. No cost, no commitment.</p>
   </div>
   {form(page_label)}
 </div></section>
@@ -159,11 +159,10 @@ def split(page='home'):
 '''
 
 def voice():
-    # Owner testimonials, verbatim with permission. Three placeholder slides until Sebastien supplies real ones; nothing in brackets ships.
+    # Owner testimonials, verbatim (exact wording and capitalization), permission reported by Sebastien 2026-11-12. Credit as posted; no invented tenure or neighborhood.
     slides = [
-        ('[Owner review one, in the owner\'s own words, used with permission.]', '[Owner name, neighborhood]', 'Short stays since [year]'),
-        ('[Owner review two.]', '[Owner name, neighborhood]', 'Monthly stays since [year]'),
-        ('[Owner review three.]', '[Owner name, neighborhood]', 'Short stays since [year]'),
+        ("Sebastien and his team are absolutely incredible to work with. When we decided to jump into the rental property world, I was completely lost and honestly a little scared. Sebastien made the whole process seem even enjoyable. Highly recommend working with him and I know we will continue to work with the Skyrun team on future ventures.", 'Jasmine Solis', 'Google review'),
+        ("Unbelievable communication. Always quick with a response. Beyond professional and transparent. Set proper expectations but even ended up over delivering. I would give 10 stars if i could", 'Anthony Iacobucci', 'Google review'),
     ]
     items = ''.join(f'<li class="slide"><blockquote>{q}</blockquote><cite>{c}<small>{m}</small></cite></li>' for q, c, m in slides)
     dots = ''.join(f'<button type="button" aria-label="Review {i + 1}"{" aria-current=\"true\"" if i == 0 else ""}></button>' for i in range(len(slides)))
