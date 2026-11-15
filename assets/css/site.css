@@ -446,3 +446,34 @@ a.src:hover{color:var(--sky-ink)}
 .hero-photo h1{font-size:clamp(42px,6.2vw,100px);max-width:15ch}
 .disp.ops{font-size:clamp(44px,5.4vw,86px)}
 @media (min-width:1101px){.nav a{white-space:nowrap}}
+
+/* v0.5 review pass: placeholders, spacing, overflow, mobile stacking */
+/* Placeholder photo labels: one consistent tag, never loose text over content */
+.photo::after{left:10px;bottom:10px;right:auto;top:auto;max-width:calc(100% - 20px);padding:4px 8px;background:rgba(250,248,243,.82);color:rgba(40,48,56,.8);font-size:11px;font-weight:600;letter-spacing:.01em;line-height:1.35;border-radius:2px;white-space:normal}
+.photo:not([data-label])::after,.photo[data-label=""]::after{display:none}
+.band .photo::after{left:var(--g);bottom:16px;font-size:12px;color:rgba(40,48,56,.8)}
+.row .photo::after{left:6px;bottom:6px;max-width:calc(100% - 12px);font-size:10px;padding:3px 6px}
+.hero-photo .photo::after{top:auto;left:auto;right:var(--g);bottom:20px;background:rgba(18,22,26,.55);color:rgba(244,241,234,.92)}
+@media (max-width:700px){.hero-photo .photo::after{display:none}}
+
+/* A month with us: headline sized for a three sentence line, column travels with the calendar */
+.hero.month .disp.sub{font-size:clamp(40px,4.6vw,72px);line-height:.98}
+@media (max-width:640px){.cal .head{flex-direction:column;align-items:flex-start;gap:4px}}
+
+
+/* Homes strip: first card starts on the gutter, not the screen edge */
+.strip{scroll-padding-inline:var(--g)}
+
+/* Letter: the quote mark sits above the first line, not on it */
+.letter .card{padding-top:clamp(48px,5vw,64px)}
+.letter .card::before{top:-6px;font-size:96px}
+
+/* Six cities table on phones: full width cells */
+@media (max-width:700px){.areas .tbl td:first-child,.areas .tbl td:last-child{width:auto;text-align:left}.areas .tbl td a{white-space:nowrap}}
+
+/* Operations: room between the steps and the buttons */
+.steps{margin-bottom:32px}
+
+/* 5-Star Ready fine print: single rule */
+.ready .fine{border-top:0;padding-top:0}
+@media (max-width:700px){.map text{font-size:19px}.map text.sm{font-size:15px}}

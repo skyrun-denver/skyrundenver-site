@@ -80,7 +80,7 @@ def footer():
 <footer class="site-foot"><div class="wrap">
   <div><a class="logo" href="/"><img src="/assets/img/skyrun-denver-horizontal.png" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"></a><p class="pend" style="margin-top:12px">SkyRun Denver is an independently owned and operated SkyRun Vacation Rentals location. [Working wording; corporate approved disclosure pending]</p></div>
   <div><h4>Contact</h4><p><a href="tel:+17207281997">720-728-1997</a></p><p><a href="mailto:denver@skyrun.com">denver@skyrun.com</a></p><p>Locally owned and operated. Serving Denver, Arvada, Wheat Ridge, Lakewood, Englewood and Centennial.</p></div>
-  <div><h4>Homeowners</h4><p><a href="/#paths">Two ways to rent</a></p><p><a href="/operations">Operations</a></p><p><a href="/areas">Areas we serve</a></p><p><a href="/#evaluation">Request a property evaluation</a></p></div>
+  <div><h4>Homeowners</h4><p><a href="/#paths">Two ways to rent</a></p><p><a href="/#ready">5-Star Ready</a></p><p><a href="/operations">Operations</a></p><p><a href="/areas">Areas we serve</a></p><p><a href="/#evaluation">Request a property evaluation</a></p></div>
   <div><h4>Guests and owners</h4><p><a href="https://skyrun.com/denver/" rel="noopener">Find a stay</a></p><p><a href="https://skyrundenver.trackhs.com/owner/" rel="noopener">Owner login</a></p><p><a href="https://skyrun.com/privacy-policy/" rel="noopener">Privacy</a></p></div>
 </div></footer>
 <a class="btn mcta" href="#evaluation">Request a property evaluation</a>
@@ -156,7 +156,7 @@ def split(page='home'):
       <li><b>Maintenance.</b> Repairs dispatched, documented, closed.</li>
       <li><b>Seasonal and exterior.</b> Snow, lawn, irrigation, and hot tubs, where included in the home's service plan.</li>
     </ul>
-    <p class="part">SkyRun Denver manages the owner relationship and the rental program. StayReady is our independent field operations partner for turnover readiness and other approved on site services. {panel}</p>
+    <p class="part">SkyRun Denver manages the owner relationship and the rental program. StayReady is our independent field operations partner for turnover readiness and other approved onsite services. {panel}</p>
   </div>
 </div></section>
 '''
@@ -172,7 +172,7 @@ def voice():
     return f'''<section class="voice" id="reviews" aria-label="Owner reviews"><div class="wrap">
   <div class="voice-head">
     <h2 class="word rv">Owners <em class="acc">say.</em></h2>
-    <p class="gline"><span class="stars" aria-hidden="true">★★★★★</span> <a href="https://www.google.com/maps/search/SkyRun+Vacation+Rentals+Denver" rel="noopener">5.0 on Google, 38 reviews</a><br><span class="small">Owner reviews below, in their words, with permission.</span></p>
+    <p class="gline"><span class="stars" aria-hidden="true">★★★★★</span> <a href="https://www.google.com/maps/search/SkyRun+Vacation+Rentals+Denver" rel="noopener">5.0 on Google, 38 reviews</a><br><span class="small">Owner reviews, in their own words, shared with permission.</span></p>
   </div>
   <div class="carousel">
     <ul class="slides" tabindex="0" aria-live="polite">{items}</ul>
@@ -268,11 +268,13 @@ home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denv
 
 <section class="hero month" id="month"><div class="wrap">
   <div class="hero-l">
+    <div class="stick">
     <p class="kicker">One owner. One home in Wash Park. One month.</p>
     <h2 class="disp sub">One home. Plenty of moving parts. <em class="acc">One accountable manager.</em></h2>
     <p class="lede">Pricing decisions, guest conversations, cleaning coordination, property care issues, and owner reporting do not happen in isolation. SkyRun Denver manages the rental program. Our independent field operations partner, StayReady, handles assigned onsite services. Here is how the pieces can come together over a typical month.</p>
     <div class="acts"><a class="btn" href="#evaluation">Request a property evaluation</a><a class="btn ghost" href="#statement">See the owner statement</a></div>
     <p class="small" style="margin-top:36px"><strong style="color:var(--ink)">Serving</strong> {' · '.join(CITIES)}</p>
+    </div>
   </div>
   <div class="cal" aria-label="A sample month: short stays, turns, service visits, and the decisions behind them">
     <div class="head"><b>November</b><span>Sample month, [home name]</span></div>
@@ -301,9 +303,9 @@ home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denv
 
 <section class="record" id="statement"><div class="wrap">
   <div>
-    <h2 class="word rv">The <em class="acc">statement.</em></h2>
-    <p class="lede" style="margin-top:18px"><strong style="color:var(--ink)">Your month, in one statement.</strong></p>
-    <p class="lede">A statement that reads like the month you just had: rental activity, revenue, fees, owner expenses and adjustments. Reservation detail sits in your owner portal. The decisions behind the numbers are explained when we make them.</p>
+    <p class="kicker">The owner statement</p>
+    <h2 class="h2 rv">Your month, <em class="acc">in one statement.</em></h2>
+    <p class="lede" style="margin-top:24px">A statement that reads like the month you just had: rental activity, revenue, fees, owner expenses and adjustments. Reservation detail sits in your owner portal. The decisions behind the numbers are explained when we make them.</p>
     <p class="small" style="margin-top:20px">Counts only. Revenue and fee figures are never published on this site.</p>
   </div>
   <div class="stmt" aria-label="Sample owner statement">
