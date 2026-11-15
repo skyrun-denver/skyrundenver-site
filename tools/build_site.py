@@ -53,8 +53,8 @@ RULES = {
 }
 ORIGIN = 'https://skyrundenver.com'
 
-# Direct link to the SkyRun Denver Google Business Profile. Replace with the verified profile URL before launch.
-GBP = 'https://www.google.com/maps/search/SkyRun+Vacation+Rentals+Denver'
+# Direct link to the SkyRun Denver Google Business Profile (share link from Matt, Nov 15, 2026).
+GBP = 'https://maps.app.goo.gl/jnpnfg5YrXfy4CqS9'
 
 MAP_SVG = '''<svg viewBox="0 0 600 560" role="img" aria-label="Schematic map of the Denver metro with the six communities SkyRun Denver serves">
       <g class="range">
