@@ -18,7 +18,7 @@
       try { v = sessionStorage.getItem('sr_' + k); } catch (e) {}
       if (f && v) f.value = v;
     });
-    var lp = form.querySelector('input[name="landing_page"]');
+    var lp = form.querySelector('input[name="skyrun_inquiry_landing_page"]');
     if (lp) { try { lp.value = sessionStorage.getItem('sr_landing_page') || location.pathname; } catch (e) { lp.value = location.pathname; } }
     form.addEventListener('submit', function () {
       var b = form.querySelector('button[type=submit]');
@@ -32,7 +32,7 @@
   function setCity(name, scroll) {
     if (!citySel) return;
     citySel.value = name;
-    if (formTitle) formTitle.textContent = name && name !== 'Outside these cities' ? 'Request a property evaluation for your ' + name + ' home.' : 'Request a property evaluation.';
+    if (formTitle && formTitle.firstChild && formTitle.firstChild.nodeType === 3) formTitle.firstChild.nodeValue = name && name !== 'Outside these cities' ? 'Tell us about your ' + name + ' property. ' : 'Tell us about the property. ';
     document.querySelectorAll('.chip').forEach(function (c) { c.setAttribute('aria-pressed', c.getAttribute('data-city') === name ? 'true' : 'false'); });
     document.querySelectorAll('.map .city').forEach(function (c) { c.classList.toggle('on', c.getAttribute('data-city') === name); });
     if (scroll) {
