@@ -14,7 +14,7 @@
 <meta property="og:image" content="https://skyrundenver.com/assets/img/skyrun-denver-horizontal.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="/assets/fonts/schibsted-grotesk-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css?v=53a1c866">
+<link rel="stylesheet" href="/assets/css/site.css?v=4c742ce6">
 <link rel="icon" href="/assets/img/favicon.png" type="image/png">
 
 <!-- GA4: G-SFVBFCQWDM. Installed through Google Tag Manager at launch; see the measurement spec. -->
@@ -24,13 +24,11 @@
 <header class="site-head dark" id="top"><div class="wrap">
   <a class="logo" href="/" aria-label="SkyRun Denver home"><img class="lg-light" src="/assets/img/skyrun-denver-horizontal-white.png" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"><img class="lg-dark" src="/assets/img/skyrun-denver-horizontal.png" width="922" height="267" alt=""></a>
   <nav class="nav" id="nav" aria-label="Main">
-    <a href="/#homes">Homes</a>
     <a href="/#month">How we work</a>
-    <a href="/#paths">Two ways</a>
     <a href="/#ready">5-Star Ready</a>
     <a href="/operations">Operations</a>
     <a href="/areas" aria-current="page">Areas</a>
-    <a href="https://skyrun.com/denver/" class="quiet">Find a stay</a>
+    <a href="https://skyrun.com/blog/category/denver/" rel="noopener">Insights</a>
     <a class="btn navcta" href="#evaluation">Request a property evaluation</a>
   </nav>
   <a class="btn sun" href="#evaluation">Request a property evaluation</a>
@@ -84,9 +82,10 @@
 </div></section>
 <section class="ask" id="evaluation"><div class="wrap">
   <div>
-    <h2 class="h2 rv" id="ft">Tell us about the property. <em class="acc">We will tell you what we would look at.</em></h2>
-    <p class="lede">Share the basics and your goals. We will review the property's potential fit, the operating considerations, and sensible next steps. If the opportunity warrants it, we will discuss a walkthrough and a written recommendation for your home, with revenue ranges only where the data supports them.</p>
-    <p class="small" style="margin-top:20px">No cost, no commitment. An evaluation is not an offer to manage the home or a licensing guarantee.</p>
+    <h2 class="h2 rv" id="ft">Tell us about your property.</h2>
+    <p class="lede">Share a few details about your home and what you're hoping to accomplish. We'll review the initial fit and discuss sensible next steps. If the property appears to be a fit, we'll discuss a walkthrough and prepare a written property-specific recommendation once we have enough information. Revenue ranges are provided only when supported by data.</p>
+    <p class="nocost">No cost. No commitment.</p>
+    <p class="small" style="margin-top:12px">An evaluation is not an offer to manage your property or a guarantee of licensing eligibility.</p>
   </div>
   <form class="eval" name="property-evaluation" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="company" novalidate>
     <input type="hidden" name="form-name" value="property-evaluation">
@@ -95,7 +94,7 @@
     <div class="f"><label for="last">Last name</label><input id="last" name="lastname" autocomplete="family-name" required></div>
     <div class="f"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
     <div class="f"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
-    <div class="f"><label for="city">Property city</label><select id="city" name="skyrun_property_city" required><option value="">Choose</option><option>Denver</option><option>Arvada</option><option>Wheat Ridge</option><option>Lakewood</option><option>Englewood</option><option>Centennial</option><option>Outside these cities</option></select></div>
+    <div class="f"><label for="city">Property city</label><select id="city" name="skyrun_property_city" required><option value="">Choose</option><option>Denver</option><option>Arvada</option><option>Wheat Ridge</option><option>Lakewood</option><option>Englewood</option><option>Centennial</option><option>Another Denver Metro city</option></select></div>
     <div class="f"><label for="type">Property type</label><select id="type" name="skyrun_property_type"><option value="">Choose</option><option>House</option><option>Townhome</option><option>Condo</option><option>ADU or carriage house</option></select></div>
     <div class="f full"><label for="strategy">Rental approach you are considering</label><select id="strategy" name="skyrun_rental_strategy"><option value="">Choose</option><option>Short-term rental</option><option>Furnished 30+ day rental</option><option>Undecided</option></select></div>
     <div class="f"><label for="start">Target start</label><select id="start" name="skyrun_start_window"><option value="">Choose</option><option>Within 30 days</option><option>1 to 3 months</option><option>3 to 6 months</option><option>More than 6 months</option><option>Just exploring</option></select></div>
@@ -110,11 +109,11 @@
 </main>
 <footer class="site-foot"><div class="wrap">
   <div><a class="logo" href="/"><img src="/assets/img/skyrun-denver-horizontal.png" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"></a><p class="pend" style="margin-top:12px">SkyRun Denver is an independently owned and operated SkyRun Vacation Rentals location. [Working wording; corporate approved disclosure pending]</p></div>
-  <div><h4>Contact</h4><p><a href="tel:+17207281997">720-728-1997</a></p><p><a href="mailto:denver@skyrun.com">denver@skyrun.com</a></p><p>Locally owned and operated. Serving Denver, Arvada, Wheat Ridge, Lakewood, Englewood and Centennial.</p></div>
-  <div><h4>Homeowners</h4><p><a href="/#paths">Two ways to rent</a></p><p><a href="/#ready">5-Star Ready</a></p><p><a href="/operations">Operations</a></p><p><a href="/areas">Areas we serve</a></p><p><a href="/#evaluation">Request a property evaluation</a></p></div>
+  <div><h4>Contact</h4><p><a href="tel:+17207281997">720-728-1997</a></p><p><a href="mailto:denver@skyrun.com">denver@skyrun.com</a></p><p>Locally owned and operated. Serving the Denver Metro area, including Denver, Arvada, Wheat Ridge, Lakewood, Englewood and Centennial.</p></div>
+  <div><h4>Homeowners</h4><p><a href="/#paths">Two ways to rent</a></p><p><a href="/#ready">5-Star Ready</a></p><p><a href="/operations">Operations</a></p><p><a href="/areas">Areas we serve</a></p><p><a href="https://skyrun.com/blog/category/denver/" rel="noopener">Insights</a></p><p><a href="/#evaluation">Request a property evaluation</a></p></div>
   <div><h4>Guests and owners</h4><p><a href="https://skyrun.com/denver/" rel="noopener">Find a stay</a></p><p><a href="https://skyrundenver.trackhs.com/owner/" rel="noopener">Owner login</a></p><p><a href="https://skyrun.com/privacy-policy/" rel="noopener">Privacy</a></p></div>
 </div></footer>
 <a class="btn mcta" href="#evaluation">Request a property evaluation</a>
-<script src="/assets/js/site.js?v=e8055afa" defer></script>
+<script src="/assets/js/site.js?v=f3efc7c3" defer></script>
 </body>
 </html>
