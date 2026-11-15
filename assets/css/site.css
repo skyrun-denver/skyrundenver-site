@@ -477,3 +477,10 @@ a.src:hover{color:var(--sky-ink)}
 /* 5-Star Ready fine print: single rule */
 .ready .fine{border-top:0;padding-top:0}
 @media (max-width:700px){.map text{font-size:19px}.map text.sm{font-size:15px}}
+
+/* v0.6 real photos (draft): image fills its frame, placeholder label and grain off */
+.photo.has-img{background:var(--night)}
+.photo.has-img::before,.photo.has-img::after{display:none}
+.photo.has-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero-photo:has(.has-img)::after{background:linear-gradient(90deg,rgba(22,27,33,.74) 0%,rgba(22,27,33,.48) 45%,rgba(22,27,33,.08) 78%),linear-gradient(180deg,rgba(22,27,33,.5) 0%,rgba(22,27,33,0) 30%,rgba(22,27,33,0) 60%,rgba(22,27,33,.7) 100%)}
+@media (max-width:700px){.hero-photo:has(.has-img)::after{background:linear-gradient(180deg,rgba(22,27,33,.55) 0%,rgba(22,27,33,.45) 40%,rgba(22,27,33,.8) 100%)}}
