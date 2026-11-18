@@ -32,7 +32,7 @@
   function setCity(name, scroll) {
     if (!citySel) return;
     citySel.value = name;
-    if (formTitle && formTitle.firstChild && formTitle.firstChild.nodeType === 3) formTitle.firstChild.nodeValue = name && name !== 'Outside these cities' ? 'Tell us about your ' + name + ' property. ' : 'Tell us about the property. ';
+    if (formTitle && formTitle.firstChild && formTitle.firstChild.nodeType === 3) formTitle.firstChild.nodeValue = name && name !== 'Another Denver Metro city' ? 'Tell us about your ' + name + ' property.' : 'Tell us about your property.';
     document.querySelectorAll('.chip').forEach(function (c) { c.setAttribute('aria-pressed', c.getAttribute('data-city') === name ? 'true' : 'false'); });
     document.querySelectorAll('.map .city').forEach(function (c) { c.classList.toggle('on', c.getAttribute('data-city') === name); });
     if (scroll) {
