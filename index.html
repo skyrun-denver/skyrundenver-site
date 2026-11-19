@@ -17,7 +17,8 @@
 <link rel="stylesheet" href="/assets/css/site.css?v=28862779">
 <link rel="icon" href="/assets/img/favicon.png" type="image/png">
 
-<!-- GA4: G-SFVBFCQWDM. Installed through Google Tag Manager at launch; see the measurement spec. -->
+<script id="hs-script-loader" async defer src="https://js-na2.hs-scripts.com/247984825.js"></script>
+<!-- GA4 and Google Ads tags go here once Sebastien grants access (Nov 19). -->
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -193,22 +194,23 @@
     <p class="nocost">No cost. No commitment.</p>
     <p class="small" style="margin-top:12px">An evaluation is not an offer to manage your property or a guarantee of licensing eligibility.</p>
   </div>
-  <form class="eval" name="property-evaluation" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="company" novalidate>
+  <form class="eval" name="property-evaluation" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="company" data-hs-do-not-collect="true" data-hs-portal="247984825" data-hs-form="eaa2f3be-9d2d-499a-ac90-660144fdbfbb" novalidate>
     <input type="hidden" name="form-name" value="property-evaluation">
     <p class="hp" aria-hidden="true"><label>Company <input name="company" tabindex="-1" autocomplete="off"></label></p>
     <div class="f"><label for="first">First name</label><input id="first" name="firstname" autocomplete="given-name" required></div>
     <div class="f"><label for="last">Last name</label><input id="last" name="lastname" autocomplete="family-name" required></div>
     <div class="f"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
     <div class="f"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
-    <div class="f"><label for="city">Property city</label><select id="city" name="skyrun_property_city" required><option value="">Choose</option><option>Denver</option><option>Arvada</option><option>Wheat Ridge</option><option>Lakewood</option><option>Englewood</option><option>Centennial</option><option>Another Denver Metro city</option></select></div>
-    <div class="f"><label for="type">Property type</label><select id="type" name="skyrun_property_type"><option value="">Choose</option><option>House</option><option>Townhome</option><option>Condo</option><option>ADU or carriage house</option></select></div>
-    <div class="f full"><label for="strategy">Rental approach you are considering</label><select id="strategy" name="skyrun_rental_strategy"><option value="">Choose</option><option>Short-term rental</option><option>Furnished 30+ day rental</option><option>Undecided</option></select></div>
-    <div class="f"><label for="start">Target start</label><select id="start" name="skyrun_start_window"><option value="">Choose</option><option>Within 30 days</option><option>1 to 3 months</option><option>3 to 6 months</option><option>More than 6 months</option><option>Just exploring</option></select></div>
-    <div class="f"><label for="found">How did you hear about us</label><select id="found" name="skyrun_discovery_channel"><option value="">Choose</option><option>Google search</option><option>Google Maps</option><option>Referral from an owner or friend</option><option>SkyRun.com</option><option>Social media</option><option>Other</option></select></div>
+    <div class="f"><label for="city">Property city</label><select id="city" name="skyrun_property_city" required><option value="">Choose</option><option value="denver">Denver</option><option value="arvada">Arvada</option><option value="wheat_ridge">Wheat Ridge</option><option value="lakewood">Lakewood</option><option value="englewood">Englewood</option><option value="centennial">Centennial</option><option value="other_needs_territory_approval">Another Denver Metro city</option></select></div>
+    <div class="f"><label for="type">Property type</label><select id="type" name="skyrun_property_type"><option value="">Choose</option><option value="single_family_house">Single-family house</option><option value="townhome">Townhome</option><option value="condominium">Condominium</option><option value="duplex_or_multifamily">Duplex or multifamily</option><option value="apartment">Apartment</option><option value="other">Other</option></select></div>
+    <div class="f full"><label for="strategy">Rental approach you are considering</label><select id="strategy" name="skyrun_rental_strategy"><option value="">Choose</option><option value="short_stays_under_30_days">Short stays (under 30 days)</option><option value="furnished_stays_30_days">Furnished stays (30+ days)</option><option value="hybrid_or_flexible">Hybrid or flexible</option><option value="not_sure_yet">Not sure yet</option></select></div>
+    <div class="f"><label for="start">Target start</label><select id="start" name="skyrun_start_window"><option value="">Choose</option><option value="as_soon_as_property_is_ready">As soon as the property is ready</option><option value="within_1_3_months">Within 1 to 3 months</option><option value="within_3_6_months">Within 3 to 6 months</option><option value="more_than_6_months">More than 6 months</option><option value="exploring_options">Exploring options</option></select></div>
+    <div class="f"><label for="found">How did you hear about us</label><select id="found" name="skyrun_discovery_channel"><option value="">Choose</option><option value="google_search">Google search</option><option value="google_maps">Google Maps</option><option value="existing_owner_referral">Referral from a SkyRun owner</option><option value="realtor_referral">Realtor referral</option><option value="other_referral">Other referral</option><option value="social_media">Social media</option><option value="direct_mail">Direct mail</option><option value="other_or_not_sure">Other or not sure</option></select></div>
     <div class="f full"><label for="notes">Anything we should know (optional)</label><textarea id="notes" name="message"></textarea></div>
     <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_term"><input type="hidden" name="utm_content"><input type="hidden" name="gclid"><input type="hidden" name="skyrun_inquiry_landing_page" value="home">
     <label class="consent"><input type="checkbox" name="consent" value="yes" required> I agree to be contacted by SkyRun Denver about my property.</label>
     <button class="btn" type="submit">Request a property evaluation</button>
+    <p class="form-err small" role="alert" hidden></p>
     <p class="privacy">We use what you send here to follow up about your property and nothing else. <a href="/privacy">Privacy policy</a>.</p>
   </form>
 </div></section>
@@ -220,6 +222,6 @@
   <div><h4>Owners</h4><p><a href="https://skyrundenver.trackhs.com/owner/" rel="noopener">Owner login</a></p><p><a href="/privacy">Privacy</a></p></div>
 </div></footer>
 <a class="btn mcta" href="#evaluation">Request a property evaluation</a>
-<script src="/assets/js/site.js?v=f3efc7c3" defer></script>
+<script src="/assets/js/site.js?v=5bb87ff8" defer></script>
 </body>
 </html>
