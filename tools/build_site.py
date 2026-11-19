@@ -127,14 +127,14 @@ def header(current, dark=False, over=False):
     return f"""<header class="{cls}" id="top"><div class="wrap">
   <a class="logo" href="/" aria-label="SkyRun Denver home"><img class="lg-light" src="/assets/img/skyrun-denver-horizontal-white.png" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"><img class="lg-dark" src="/assets/img/skyrun-denver-horizontal.png" width="922" height="267" alt=""></a>
   <nav class="nav" id="nav" aria-label="Main">
-    {a('/#month', 'How we work', 'month')}
+    {a('/#month', 'How We Work', 'month')}
     {a('/#ready', '5-Star Ready', 'ready')}
     {a('/operations', 'Operations', 'operations')}
     {a('/areas', 'Areas', 'areas')}
     <a href="https://skyrun.com/blog/category/denver/" rel="noopener">Insights</a>
-    <a class="btn navcta" href="#evaluation">Request a property evaluation</a>
+    <a class="btn navcta" href="#evaluation">Request a Property Evaluation</a>
   </nav>
-  <a class="btn{' sun' if dark else ''}" href="#evaluation">Request a property evaluation</a>
+  <a class="btn{' sun' if dark else ''}" href="#evaluation">Request a Property Evaluation</a>
   <button class="menu" type="button" aria-controls="nav" aria-expanded="false"><span></span><span></span>Menu</button>
 </div></header>
 <main id="main">
@@ -145,10 +145,10 @@ def footer():
 <footer class="site-foot"><div class="wrap">
   <div><a class="logo" href="/"><img src="/assets/img/skyrun-denver-horizontal.png" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"></a><p class="small" style="margin-top:12px">SkyRun Denver is an independently owned and operated SkyRun Vacation Rentals location.</p></div>
   <div><p class="fh">Contact</p><p><a href="tel:+17207281997">720-728-1997</a></p><p><a href="mailto:denver@skyrun.com">denver@skyrun.com</a></p><p>Locally owned and operated. Serving the Denver Metro area, including Denver, Arvada, Wheat Ridge, Lakewood, Englewood and Centennial.</p></div>
-  <div><p class="fh">Homeowners</p><p><a href="/#paths">Two ways to rent</a></p><p><a href="/#ready">5-Star Ready</a></p><p><a href="/operations">Operations</a></p><p><a href="/areas">Areas we serve</a></p><p><a href="https://skyrun.com/blog/category/denver/" rel="noopener">Insights</a></p><p><a href="/#evaluation">Request a property evaluation</a></p></div>
-  <div><p class="fh">Owners</p><p><a href="https://skyrundenver.trackhs.com/owner/" rel="noopener">Owner login</a></p><p><a href="/privacy">Privacy</a></p></div>
+  <div><p class="fh">Homeowners</p><p><a href="/#paths">Two Ways to Rent</a></p><p><a href="/#ready">5-Star Ready</a></p><p><a href="/operations">Operations</a></p><p><a href="/areas">Areas We Serve</a></p><p><a href="https://skyrun.com/blog/category/denver/" rel="noopener">Insights</a></p><p><a href="/#evaluation">Request a Property Evaluation</a></p></div>
+  <div><p class="fh">Owners</p><p><a href="https://skyrundenver.trackhs.com/owner/" rel="noopener">Owner Login</a></p><p><a href="/privacy">Privacy</a></p></div>
 </div></footer>
-<a class="btn mcta" href="#evaluation">Request a property evaluation</a>
+<a class="btn mcta" href="#evaluation">Request a Property Evaluation</a>
 <script src="/assets/js/site.js?v={JS_V}" defer></script>
 </body>
 </html>
@@ -188,7 +188,7 @@ def form(page_label):
     <div class="f full"><label for="notes">Anything we should know (optional)</label><textarea id="notes" name="message"></textarea></div>
     <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_term"><input type="hidden" name="utm_content"><input type="hidden" name="gclid"><input type="hidden" name="skyrun_inquiry_landing_page" value="{page_label}">
     <label class="consent"><input type="checkbox" name="consent" value="yes" required> I agree to be contacted by SkyRun Denver about my property.</label>
-    <button class="btn" type="submit">Request a property evaluation</button>
+    <button class="btn" type="submit">Request a Property Evaluation</button>
     <p class="form-err small" role="alert" hidden></p>
     <p class="privacy">We use what you send here to follow up about your property and nothing else. <a href="/privacy">Privacy policy</a>.</p>
   </form>'''
@@ -212,7 +212,7 @@ def areas_table():
   <p class="lede" style="font-size:19px;line-height:1.5;max-width:46ch">Where we work, and what each one asks of you.</p>
   <table class="tbl"><tbody>{rows}
   </tbody></table>
-  <p class="small" style="margin-top:20px">Full detail for each city, with the map, on <a href="/areas" style="color:var(--sky-ink)">Areas we serve</a>.</p>
+  <p class="small" style="margin-top:20px">Full detail for each city, with the map, on <a href="/areas" style="color:var(--sky-ink)">Areas We Serve</a>.</p>
 </div></section>
 '''
 
@@ -285,7 +285,7 @@ def paths():
     <div class="path rv d1"><div class="photo" data-label="Photo: a short stay home, staged and guest ready"></div><h3>Short-term rentals</h3><p>Flexible nightly and weekly stays for eligible properties, supported by active pricing, guest management, and coordinated operations.</p></div>
     <div class="path rv d2"><div class="photo alt" data-label="Photo: a furnished monthly home, lived in and calm"></div><h3>Furnished 30+ day rentals</h3><p>Longer stays for relocation, temporary housing, and other furnished-rental needs, with a different pricing and management approach.</p></div>
   </div>
-  <p style="margin-top:clamp(28px,3vw,44px)"><a class="btn ghost" href="#evaluation">Find my property's fit</a></p>
+  <p style="margin-top:clamp(28px,3vw,44px)"><a class="btn ghost" href="#evaluation">Find My Property's Fit</a></p>
 </div></section>
 '''
 
@@ -382,7 +382,7 @@ home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denv
     <p class="kicker">Denver Metro · Short-term &amp; furnished 30+ day rental management</p>
     <h1 class="disp">The right rental strategy. <em class="acc">A home that's ready for it.</em></h1>
     <p class="lede">We look at your goals, local rules, and operating costs before recommending short stays, furnished 30+ day rentals, or neither. If the property is a fit, we help get it ready and manage the details.</p>
-    <div class="acts"><a class="btn sun" href="#evaluation">Request a property evaluation</a><a class="btn glass" href="#month">See how we work</a></div>
+    <div class="acts"><a class="btn sun" href="#evaluation">Request a Property Evaluation</a><a class="btn glass" href="#month">See How We Work</a></div>
     """ + lead_card() + """
   </div>
 </section>
@@ -449,7 +449,7 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
     <h1 class="disp ops">Between checkout and check in, <em class="acc">the details matter.</em></h1>
     <p class="lede">A successful turnover is more than changing linens. The property needs to be cleaned, reset, supplied, checked for issues, and ready for the next arrival. StayReady, the <a href="https://www.gostayready.com/hospitality-field-operations" rel="noopener">hospitality field operations company</a> based here in Colorado, executes and documents its assigned field work. SkyRun Denver keeps responsibility for the overall rental program and owner communication.</p>
     <ol class="steps"><li>Plan the turn</li><li>Clean and reset</li><li>Flag and route issues</li><li>Confirm readiness for the next arrival</li></ol>
-    <div class="acts"><a class="btn" href="#evaluation">Evaluate my property</a><a class="btn ghost" href="#record">See the record</a></div>
+    <div class="acts"><a class="btn" href="#evaluation">Evaluate My Property</a><a class="btn ghost" href="#record">See the Record</a></div>
   </div>
   <h2 class="sr-only">One turnover, hour by hour</h2><div class="cal" aria-label="One turnover, hour by hour"><div class="ledger">
     <div class="head"><span>Time</span><span>What happened</span><span style="text-align:right">Who</span></div>
@@ -563,9 +563,9 @@ thanks = head('Evaluation Requested | SkyRun Denver', 'Your property evaluation 
   <p class="kicker">Evaluation requested</p>
   <h1 class="h2">Thanks for reaching out.</h1>
   <p class="lede">We will review your information and be in touch soon. If anything is urgent, call <a href="tel:+17207281997">720-728-1997</a>.</p>
-  <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn ghost" href="/operations">See what happens between guests</a><a class="btn ghost" href="/areas">Read your city's rules</a></div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn ghost" href="/operations">See What Happens Between Guests</a><a class="btn ghost" href="/areas">Read Your City's Rules</a></div>
 </div></section>
-''' + footer().replace('<a class="btn mcta" href="#evaluation">Request a property evaluation</a>', '')
+''' + footer().replace('<a class="btn mcta" href="#evaluation">Request a Property Evaluation</a>', '')
 (SITE / 'thank-you.html').write_text(fix_cta(thanks))
 
 # ---------------- Privacy ----------------
@@ -626,7 +626,7 @@ nf = head('Page Not Found | SkyRun Denver', 'This page could not be found.', '/4
   <p class="kicker">Page not found</p>
   <h1 class="h2">This page moved or never existed.</h1>
   <p class="lede">Start from the homepage, or tell us about your property and we will take it from there.</p>
-  <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="/">Go to the homepage</a><a class="btn ghost" href="/#evaluation">Request a property evaluation</a></div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="/">Go to the Homepage</a><a class="btn ghost" href="/#evaluation">Request a Property Evaluation</a></div>
 </div></section>
 """ + footer()
 (SITE / '404.html').write_text(fix_cta(nf))
