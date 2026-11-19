@@ -579,10 +579,7 @@ nf = head('Page Not Found | SkyRun Denver', 'This page could not be found.', '/4
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Pre launch: production is noindexed too. Remove the production block at launch (Round 6).
-[context.production]
-  command = "printf '/*\\n  X-Robots-Tag: noindex\\n' >> _headers"
-
+# Live since Nov 19, 2026: production indexes. Previews and branch deploys never do.
 # Branch deploys and deploy previews never index.
 [context.deploy-preview]
   command = "printf '/*\\n  X-Robots-Tag: noindex\\n' >> _headers"
