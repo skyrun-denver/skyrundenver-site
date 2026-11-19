@@ -165,9 +165,9 @@ def form(page_label):
     opts = ''.join(f'<option value="{c.lower().replace(" ", "_")}">{c}</option>' for c in CITIES) + '<option value="other_needs_territory_approval">Another Denver Metro city</option>'
     def sel(pairs):
         return ''.join(f'<option value="{v}">{t}</option>' for v, t in pairs)
-    return f'''<form class="eval" name="property-evaluation" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="company" data-hs-do-not-collect="true" data-hs-portal="{HS_PORTAL}" data-hs-form="{HS_FORM}" novalidate>
+    return f'''<form class="eval" name="property-evaluation" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field" data-hs-do-not-collect="true" data-hs-portal="{HS_PORTAL}" data-hs-form="{HS_FORM}" novalidate>
     <input type="hidden" name="form-name" value="property-evaluation">
-    <p class="hp" aria-hidden="true"><label>Company <input name="company" tabindex="-1" autocomplete="off"></label></p>
+    <p class="hp" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
     <div class="f"><label for="first">First name</label><input id="first" name="firstname" autocomplete="given-name" required></div>
     <div class="f"><label for="last">Last name</label><input id="last" name="lastname" autocomplete="family-name" required></div>
     <div class="f"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>

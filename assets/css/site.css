@@ -159,7 +159,7 @@ input:user-invalid,select:user-invalid{border-bottom-color:#B8342C}
 .consent input{width:20px;height:20px;min-height:0;margin-top:1px;flex:none}
 form.eval .btn{grid-column:1/-1;width:100%;min-height:60px;font-size:18px;margin-top:8px}
 .privacy{grid-column:1/-1;font-size:13px;color:var(--mute);padding-top:12px}
-.hp{position:absolute;left:-9999px}
+.hp{display:none!important}
 
 /* map (areas page) */
 .maphero{background:var(--night);color:#fff;overflow:hidden}
@@ -593,3 +593,4 @@ body{font-size:18px}
 .letter .photo.portrait{position:relative;aspect-ratio:4/5;max-width:420px;min-height:0;border-radius:2px;overflow:hidden}
 .letter .photo.portrait img{object-position:50% 30%}
 @media (max-width:700px){.letter .photo.portrait{display:block;max-width:280px}}
+.form-err{color:#B42318;margin-top:10px}

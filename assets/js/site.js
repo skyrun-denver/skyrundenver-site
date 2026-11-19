@@ -25,8 +25,15 @@
       if (form.dataset.sent) return;            // second pass: let the Netlify post go through
       ev.preventDefault();
       var err = form.querySelector('.form-err');
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-      if (form.querySelector('input[name="company"]').value) return;   // honeypot filled: drop quietly
+      if (!form.checkValidity()) {
+        var bad = form.querySelector(':invalid');
+        if (err) { err.textContent = 'Please complete the highlighted fields.'; err.hidden = false; }
+        if (bad) { bad.scrollIntoView({ block: 'center' }); }
+        form.reportValidity();
+        return;
+      }
+      var trap = form.querySelector('input[name="bot-field"]');
+      if (trap && trap.value) { form.dataset.sent = '1'; HTMLFormElement.prototype.submit.call(form); return; }   // bots: Netlify files it as spam
       var b = form.querySelector('button[type=submit]');
       if (b) { b.disabled = true; b.textContent = 'Sending'; }
       if (err) err.hidden = true;
