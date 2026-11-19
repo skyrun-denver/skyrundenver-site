@@ -17,7 +17,7 @@ CITIES = ['Denver', 'Arvada', 'Wheat Ridge', 'Lakewood', 'Englewood', 'Centennia
 # Cabin Door Media shoot of 192 S Madison St (Nov 3). Nothing that appears on gostayready.com. Web files are made by
 # tools/make_photos.py, which applies the shared grade (tools/grade.py). Photo plan: https://claude.ai/artifact/MXL6ypCmvhDjeahW4uvgCA
 PHOTOS = {
-    'Photo: a managed Denver home at golden hour, full bleed, licensed and credited': ('parker-twilight', 'A SkyRun Denver home at twilight, with the metro lights and the Front Range beyond', '45% 55%', True),
+    'Photo: a managed Denver home at golden hour, full bleed, licensed and credited': ('rooftop-skyline', 'Rooftop deck with a fire table and a view of downtown Denver', '50% 62%', True),
     'Photo: the same home, interior, late afternoon, licensed and credited': ('living-kitchen', 'Open living room and kitchen in a managed Denver home', '50% 55%', False),
     'Photo: featured managed home, exterior at golden hour': ('townhome-exterior', 'Modern two story Denver townhome with a fenced front yard', '50% 50%', False),
     'Photo: kitchen, staged and guest ready': ('madison-kitchen', 'Kitchen with a waterfall island, pendant lights, and double ovens', '50% 50%', False),
@@ -42,8 +42,9 @@ def photos(html):
         name, alt, pos, eager = PHOTOS[label]
         load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
         sizes = '100vw' if eager or 'band' in cls else '(max-width: 700px) 100vw, 50vw'
+        big = f', /assets/img/homes/{name}-2400.webp 2400w' if (SITE / f'assets/img/homes/{name}-2400.webp').exists() else ''
         return (f'<div class="{cls} has-img"><img src="/assets/img/homes/{name}-1440.webp" '
-                f'srcset="/assets/img/homes/{name}-800.webp 800w, /assets/img/homes/{name}-1440.webp 1440w" sizes="{sizes}" '
+                f'srcset="/assets/img/homes/{name}-800.webp 800w, /assets/img/homes/{name}-1440.webp 1440w{big}" sizes="{sizes}" '
                 f'alt="{alt}" style="object-position:{pos}" {load}></div>')
     return re.sub(r'<div class="(photo[^"]*)"(?: style="[^"]*")? data-label="([^"]*)"></div>', sub, html)
 
