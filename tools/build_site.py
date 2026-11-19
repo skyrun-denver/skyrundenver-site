@@ -17,7 +17,7 @@ CITIES = ['Denver', 'Arvada', 'Wheat Ridge', 'Lakewood', 'Englewood', 'Centennia
 # Cabin Door Media shoot of 192 S Madison St (Nov 3). Nothing that appears on gostayready.com. Web files are made by
 # tools/make_photos.py, which applies the shared grade (tools/grade.py). Photo plan: https://claude.ai/artifact/MXL6ypCmvhDjeahW4uvgCA
 PHOTOS = {
-    'Photo: a managed Denver home at golden hour, full bleed, licensed and credited': ('rooftop-skyline', 'Rooftop deck with a fire table and a view of downtown Denver', '50% 62%', True),
+    'Photo: a managed Denver home at golden hour, full bleed, licensed and credited': ('parker-twilight', 'A SkyRun Denver home at twilight, with the metro lights and the Front Range beyond', '45% 55%', True),
     'Photo: the same home, interior, late afternoon, licensed and credited': ('living-kitchen', 'Open living room and kitchen in a managed Denver home', '50% 55%', False),
     'Photo: featured managed home, exterior at golden hour': ('townhome-exterior', 'Modern two story Denver townhome with a fenced front yard', '50% 50%', False),
     'Photo: kitchen, staged and guest ready': ('madison-kitchen', 'Kitchen with a waterfall island, pendant lights, and double ovens', '50% 50%', False),
