@@ -28,6 +28,11 @@ PHOTOS = {
     'Photo: a furnished monthly home, lived in and calm': ('brick-reading-nook', 'Sitting area with two leather chairs against an exposed brick wall', '50% 55%', False),
     'Photo: the home, guest ready': ('living-lounge', 'Living room with an orange sofa and tall windows', '45% 50%', False),
 }
+def bust(html):
+    """Add a content hash to every /assets/img URL. /assets/* is served immutable, so a changed photo needs a new URL."""
+    import re
+    return re.sub(r'(/assets/img/[\w/.-]+?\.(?:webp|png|jpg))(?![\w?])', lambda m: m.group(1) + '?v=' + _v(m.group(1).lstrip('/')), html)
+
 def photos(html):
     import re
     def sub(m):
@@ -432,7 +437,7 @@ home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denv
   </div>
 </div></section>
 """ + people() + homes() + split_home() + letter() + metro() + ask('home') + footer()
-(SITE / 'index.html').write_text(photos(home))
+(SITE / 'index.html').write_text(bust(photos(home)))
 
 # ---------------- Operations ----------------
 ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denver',
@@ -518,7 +523,7 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
   </div>
 </div></section>
 ''' + split('operations') + ask('operations') + footer()
-(SITE / 'operations.html').write_text(photos(ops).replace('<section class="band">', '<section class="band">', 1))
+(SITE / 'operations.html').write_text(bust(photos(ops)).replace('<section class="band">', '<section class="band">', 1))
 
 # ---------------- Areas ----------------
 chips = ''.join(f'<button class="chip" type="button" data-city="{c}" aria-pressed="false">{c}</button>' for c in CITIES)
