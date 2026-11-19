@@ -1,4 +1,6 @@
-/index.html   /            301
-/operations.html  /operations  301
-/areas.html   /areas       301
-/thank-you.html  /thank-you  301
+/index.html   /            301!
+/operations.html  /operations  301!
+/areas.html   /areas       301!
+/thank-you.html  /thank-you  301!
+/privacy.html  /privacy  301!
+https://www.skyrundenver.com/*  https://skyrundenver.com/:splat  301!
