@@ -112,7 +112,7 @@ def head(title, desc, path, extra=''):
 {extra}
 {HS_TRACKING}
 <meta name="msvalidate.01" content="4C8477B52376714CF481D739F1D6C362">
-<!-- GA4 and Google Ads tags go here once Sebastien grants access (Nov 19). -->
+{tags()}
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -168,6 +168,27 @@ HS_FOUND = [('google_search', 'Google search'), ('google_maps', 'Google Maps'), 
             ('realtor_referral', 'Realtor referral'), ('other_referral', 'Other referral'), ('social_media', 'Social media'),
             ('direct_mail', 'Direct mail'), ('other_or_not_sure', 'Other or not sure')]
 HS_TRACKING = '<script id="hs-script-loader" async defer src="https://js-na2.hs-scripts.com/247984825.js"></script>'
+
+# Ad and analytics tags. Each stays off until its ID is filled in (accounts are Sebastien's, per the HQ ruling).
+GA4_ID = ''          # Google Analytics 4 measurement ID, e.g. G-XXXXXXXXXX
+ADS_ID = ''          # Google Ads tag ID, e.g. AW-123456789
+ADS_LEAD_LABEL = ''  # Google Ads conversion label for the property evaluation lead
+META_PIXEL = ''      # Meta pixel ID
+def tags():
+    out = []
+    first = GA4_ID or ADS_ID
+    if first:
+        cfg = ''.join(f"gtag('config','{i}');" for i in (GA4_ID, ADS_ID) if i)
+        out.append(f'<script async src="https://www.googletagmanager.com/gtag/js?id={first}"></script>'
+                   f"<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());{cfg}</script>")
+    if ADS_ID and ADS_LEAD_LABEL:
+        out.append(f"<script>window.SRD_ADS_LEAD='{ADS_ID}/{ADS_LEAD_LABEL}';</script>")
+    if META_PIXEL:
+        out.append("<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};"
+                   "if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;"
+                   "s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');"
+                   f"fbq('init','{META_PIXEL}');fbq('track','PageView');</script>")
+    return '\n'.join(out)
 
 def form(page_label):
     opts = ''.join(f'<option value="{c.lower().replace(" ", "_")}">{c}</option>' for c in CITIES) + '<option value="other_needs_territory_approval">Another Denver Metro city</option>'

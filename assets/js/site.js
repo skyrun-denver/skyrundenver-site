@@ -51,6 +51,14 @@
       var finish = function () {
         if (done) return; done = true;
         try { window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'generate_lead', form: 'property_evaluation', city: form.elements.skyrun_property_city.value }); } catch (e) {}
+        try {   // Ad and analytics conversions; each fires only when its tag is on the page (see tags() in build_site.py)
+          var city = form.elements.skyrun_property_city.value;
+          if (window.gtag) {
+            window.gtag('event', 'generate_lead', { form: 'property_evaluation', city: city });
+            if (window.SRD_ADS_LEAD) window.gtag('event', 'conversion', { send_to: window.SRD_ADS_LEAD });
+          }
+          if (window.fbq) window.fbq('track', 'Lead', { content_name: 'property_evaluation' });
+        } catch (e) {}
         form.dataset.sent = '1';
         HTMLFormElement.prototype.submit.call(form);   // Netlify copy and the thank you page
       };
