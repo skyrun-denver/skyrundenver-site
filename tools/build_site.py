@@ -63,6 +63,28 @@ ORIGIN = 'https://skyrundenver.com'
 # Direct link to the SkyRun Denver Google Business Profile (share link from Matt, Nov 15, 2026).
 GBP = 'https://maps.app.goo.gl/jnpnfg5YrXfy4CqS9'
 
+# Structured data (JSON-LD). SkyRun Denver as a local business; no Service schema for StayReady services (SEO ruling, Nov 12).
+import json as _json
+def ld(obj):
+    return '<script type="application/ld+json">' + _json.dumps(obj, separators=(',', ':')) + '</script>'
+SCHEMA_HOME = ld({
+    '@context': 'https://schema.org',
+    '@graph': [
+        {'@type': 'LocalBusiness', '@id': ORIGIN + '/#business',
+         'name': 'SkyRun Denver', 'alternateName': 'SkyRun Vacation Rentals Denver Metro',
+         'description': 'Short-term and furnished 30+ day rental management for homeowners in the Denver Metro area.',
+         'url': ORIGIN + '/', 'telephone': '+1-720-728-1997', 'email': 'denver@skyrun.com',
+         'logo': ORIGIN + '/assets/img/skyrun-denver-horizontal.png', 'image': ORIGIN + '/assets/img/og-skyrun-denver.jpg',
+         'areaServed': [{'@type': 'City', 'name': c + ', CO'} for c in ['Denver', 'Arvada', 'Wheat Ridge', 'Lakewood', 'Englewood', 'Centennial']],
+         'parentOrganization': {'@type': 'Organization', 'name': 'SkyRun Vacation Rentals', 'url': 'https://skyrun.com/'},
+         'sameAs': [GBP]},
+        {'@type': 'WebSite', '@id': ORIGIN + '/#website', 'url': ORIGIN + '/', 'name': 'SkyRun Denver', 'publisher': {'@id': ORIGIN + '/#business'}},
+    ]})
+def crumbs(name, path):
+    return ld({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
+        {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': ORIGIN + '/'},
+        {'@type': 'ListItem', 'position': 2, 'name': name, 'item': ORIGIN + path}]})
+
 MAP_SVG = '''<svg viewBox="0 0 600 560" role="img" aria-label="Schematic map of the Denver metro with the six communities SkyRun Denver serves">
       <g class="range">
         <path class="snow" d="M20 40 L60 10 L95 60 L130 25 L165 80 L200 40 L230 95"/>
@@ -104,8 +126,12 @@ def head(title, desc, path, extra=''):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{ORIGIN}{path}">
-<meta property="og:image" content="{ORIGIN}/assets/img/skyrun-denver-horizontal.png">
+<meta property="og:image" content="{ORIGIN}/assets/img/og-skyrun-denver.jpg?v={_v('assets/img/og-skyrun-denver.jpg')}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Rooftop deck at a SkyRun Denver home with the downtown Denver skyline">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{ORIGIN}/assets/img/og-skyrun-denver.jpg?v={_v('assets/img/og-skyrun-denver.jpg')}">
 <link rel="preload" href="/assets/fonts/schibsted-grotesk-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/site.css?v={CSS_V}">
 <link rel="icon" href="/assets/img/favicon.png" type="image/png">
@@ -396,7 +422,7 @@ def metro():
 
 # ---------------- Home ----------------
 home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denver Homeowners',
-            'SkyRun Denver manages short-term and furnished 30+ day rentals for homeowners in Denver, Arvada, Wheat Ridge, Lakewood, Englewood, and Centennial. Request a property evaluation.', '/') + header('home', over=True) + """
+            'SkyRun Denver manages short-term and furnished 30+ day rentals for homeowners in Denver, Arvada, Wheat Ridge, Lakewood, Englewood, and Centennial. Request a property evaluation.', '/', SCHEMA_HOME) + header('home', over=True) + """
 <section class="hero-photo">
   <div class="photo rv" data-label="Photo: a managed Denver home at golden hour, full bleed, licensed and credited"></div>
   <div class="wrap copy">
@@ -463,7 +489,7 @@ home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denv
 
 # ---------------- Operations ----------------
 ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denver',
-           'One turnover, hour by hour. StayReady runs the cleaning, linens, restocking, inspections, and maintenance behind every SkyRun Denver stay.', '/operations') + header('operations') + '''
+           'One turnover, hour by hour. StayReady runs the cleaning, linens, restocking, inspections, and maintenance behind every SkyRun Denver stay.', '/operations', crumbs('Operations', '/operations')) + header('operations') + '''
 <section class="hero"><div class="wrap">
   <div class="hero-l">
     <p class="kicker">Operations. A Tuesday in Wash Park, checkout at 10:00, check in at 4:00.</p>
@@ -551,7 +577,7 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
 chips = ''.join(f'<button class="chip" type="button" data-city="{c}" aria-pressed="false">{c}</button>' for c in CITIES)
 rules = ''.join(f'<li><b>{c}<small>Reviewed {RULES_REVIEWED}</small></b><p>{RULES[c][0]} <a href="{RULES[c][1]}" rel="noopener" class="src">City source</a>. <a href="#evaluation" data-city="{c}">Start in {c}</a></p></li>' for c in CITIES)
 areas = head('Areas We Serve | Denver, Arvada, Wheat Ridge, Lakewood, Englewood, Centennial | SkyRun Denver',
-             'SkyRun Denver manages short-term and furnished rentals in Denver, Arvada, Wheat Ridge, Lakewood, Englewood, and Centennial. Each city has its own rules; the evaluation starts with yours.', '/areas') + header('areas', dark=True) + f'''
+             'SkyRun Denver manages short-term and furnished rentals in Denver, Arvada, Wheat Ridge, Lakewood, Englewood, and Centennial. Each city has its own rules; the evaluation starts with yours.', '/areas', crumbs('Areas We Serve', '/areas')) + header('areas', dark=True) + f'''
 <section class="maphero"><div class="wrap">
   <div>
     <h1>The Denver metro is not one <em class="acc">rental market.</em></h1>
