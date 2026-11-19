@@ -562,3 +562,20 @@ a.quietlink{display:inline-block;margin-left:4px;color:var(--sky-ink);font-weigh
   .cred p span:nth-child(2)::before{display:none}
   .letter .photo:not(.has-img){display:none}
 }
+
+/* v0.8 Direction C: Local Stewardship and Owner Confidence (approved Nov 18) */
+:root{--mute:#5F6670}
+body{font-size:18px}
+.lead-card{display:flex;align-items:center;gap:14px;margin-top:28px;max-width:420px;padding:10px 16px 10px 10px;background:rgba(22,27,33,.55);border:1px solid rgba(244,241,234,.25);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.lead-card .ph{flex:none;width:64px;height:64px;border-radius:50%;object-fit:cover;background:#C9C2B3;display:flex;align-items:center;justify-content:center;text-align:center;font-size:9px;line-height:1.15;color:#283038;font-weight:700;padding:6px}
+.lead-card img.ph{padding:0}
+.lead-card p{margin:0;font-size:14px;line-height:1.35;color:rgba(255,255,255,.92)}
+.lead-card b{color:#fff;font-size:15px}
+.people{background:var(--night);padding:0}
+.people .ph{aspect-ratio:21/8;min-height:260px;background:#3A424B;display:flex;align-items:flex-end;padding:20px var(--g);color:rgba(244,241,234,.85);font-size:14px;font-weight:600}
+.people .ph span{background:rgba(18,22,26,.6);padding:6px 10px}
+.people .photo{aspect-ratio:21/8;min-height:260px}
+.letter .photo:not(.has-img){display:block;min-height:420px;background:#CFC8B8}
+.letter .photo:not(.has-img)::after{left:16px;bottom:16px;background:rgba(250,248,243,.9);color:#283038;font-size:12px;padding:6px 10px}
+.quotes figcaption{color:var(--sky-ink)}
+@media (max-width:700px){.letter .photo:not(.has-img){display:block;min-height:260px}.people .ph,.people .photo{aspect-ratio:4/3;min-height:0}}
