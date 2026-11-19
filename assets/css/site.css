@@ -588,3 +588,8 @@ body{font-size:18px}
 .legal p,.legal li{font-size:17px;line-height:1.6;color:var(--body);margin:0 0 12px}
 .legal ul{padding-left:20px;margin:0 0 12px}
 .legal a{color:var(--sky-ink)}
+
+/* v0.9b Sebastien portrait (Nov 19) */
+.letter .photo.portrait{position:relative;aspect-ratio:4/5;max-width:420px;min-height:0;border-radius:2px;overflow:hidden}
+.letter .photo.portrait img{object-position:50% 30%}
+@media (max-width:700px){.letter .photo.portrait{display:block;max-width:280px}}

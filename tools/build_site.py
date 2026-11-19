@@ -263,7 +263,7 @@ def paths():
 '''
 
 def ready():
-    # Gate names from Sebastien's v2.1 (source: Owner Onboarding Packet v6.1). Verify against the packet before launch.
+    # Gate names from Sebastien's approved v2.1 copy; checked Nov 19 against Owner Onboarding Packet V6 (same six gates and three outcomes).
     gates = ['Agreement and intake', 'Rental compliance', 'Operational walkthrough and action plan',
              'Corrections and 150-point inspection', 'Inventory and operating setup', 'Guest-ready design and launch']
     items = ''.join(f'<li><span class="n">{i + 1:02d}</span><h3>{t}</h3></li>' for i, t in enumerate(gates))
@@ -285,13 +285,15 @@ def ready():
 
 # Direction C (approved by Matt, Nov 18): people first. Until real photos exist these render as labeled
 # placeholders on the private draft site. Before launch, add the files and set the names, or remove the blocks.
-SEB_PORTRAIT = None   # e.g. 'sebastien-portrait' (assets/img/people/<name>-800.webp), square crop for the hero card
-SEB_LETTER = None     # e.g. 'sebastien-vertical' (assets/img/people/<name>-800.webp), vertical portrait beside the letter
+SEB_PORTRAIT = 'sebastien-guite'  # headshot from Sebastien, Nov 19 (SG-Head Shot.jpg in the shared photo folder)
+#  # e.g. 'sebastien-portrait' (assets/img/people/<name>-800.webp), square crop for the hero card
+SEB_LETTER = 'sebastien-guite'
+#    # e.g. 'sebastien-vertical' (assets/img/people/<name>-800.webp), vertical portrait beside the letter
 TEAM_PHOTO = None     # e.g. 'denver-team' (assets/img/people/<name>-1440.webp), wide, the team at a managed home
 
 def lead_card():
     if SEB_PORTRAIT:
-        ph = f'<img class="ph" src="/assets/img/people/{SEB_PORTRAIT}-800.webp" alt="Sebastien Guite" width="64" height="64">'
+        ph = f'<img class="ph" src="/assets/img/people/{SEB_PORTRAIT}-square-256.webp" alt="Sebastien Guite" width="64" height="64">'
     else:
         return ''  # hidden until the portrait arrives
     return f'<div class="lead-card">{ph}<p><b>Sebastien Guite</b><br>Location Owner, SkyRun Vacation Rentals Denver Metro</p></div>'
@@ -317,7 +319,7 @@ def homes():
 """
 
 def letter():
-    portrait = (f'<div class="photo has-img" style="margin-top:28px"><img src="/assets/img/people/{SEB_LETTER}-800.webp" alt="Sebastien Guite" loading="lazy" decoding="async"></div>' if SEB_LETTER else '')
+    portrait = (f'<div class="photo has-img portrait" style="margin-top:28px"><img src="/assets/img/people/{SEB_LETTER}-800.webp" srcset="/assets/img/people/{SEB_LETTER}-800.webp 800w, /assets/img/people/{SEB_LETTER}-1200.webp 1200w" sizes="(max-width: 700px) 70vw, 420px" alt="Sebastien Guite, Location Owner of SkyRun Denver" width="800" height="991" loading="lazy" decoding="async"></div>' if SEB_LETTER else '')
     return '''<section class="letter" id="letter"><div class="wrap">
   <div><p class="kicker">From Sebastien</p><h2 class="h2 rv">I'd rather give you a plan that holds up than <em class="acc">a number that sounds good.</em></h2>''' + portrait + '''</div>
   <div class="card rv d1">
