@@ -13,20 +13,26 @@ JS_V = _v('assets/js/site.js')
 CITIES = ['Denver', 'Arvada', 'Wheat Ridge', 'Lakewood', 'Englewood', 'Centennial']
 
 # City rules. Drafted 2026-11-12 from each city's own pages; pending SkyRun Denver sign off (the [Draft] tag comes off on sign off).
-# Photos. Source: Kiela's shortlist (Drive folder 1qmCP4P8oT_n0ZMtdn68XQcQ64kC3fTxw, Nov 13). Draft use only:
-# owner and photographer permission, home names, and rental mode labels are still pending before launch.
+# Photos. SkyRun Denver homes only: Kiela's shortlist (Drive folder 1qmCP4P8oT_n0ZMtdn68XQcQ64kC3fTxw, Nov 13) and the
+# Cabin Door Media shoot of 192 S Madison St (Nov 3). Nothing that appears on gostayready.com. Web files are made by
+# tools/make_photos.py, which applies the shared grade (tools/grade.py). Photo plan: https://claude.ai/artifact/MXL6ypCmvhDjeahW4uvgCA
 PHOTOS = {
     'Photo: a managed Denver home at golden hour, full bleed, licensed and credited': ('rooftop-skyline', 'Rooftop deck with a fire table and a view of downtown Denver', '50% 62%', True),
     'Photo: the same home, interior, late afternoon, licensed and credited': ('living-kitchen', 'Open living room and kitchen in a managed Denver home', '50% 55%', False),
     'Photo: featured managed home, exterior at golden hour': ('townhome-exterior', 'Modern two story Denver townhome with a fenced front yard', '50% 50%', False),
-    'Photo: living room, morning light': ('living-room', 'Living room with a fireplace and a sectional sofa', '45% 50%', False),
-    'Photo: kitchen, staged and guest ready': ('open-living', 'Open living room with the kitchen and dining area behind it', '40% 50%', False),
-    'Photo: primary bedroom': ('brick-living', 'Living room with exposed brick walls and mid century chairs', '50% 50%', False),
+    'Photo: kitchen, staged and guest ready': ('madison-kitchen', 'Kitchen with a waterfall island, pendant lights, and double ovens', '50% 50%', False),
+    'Photo: primary bedroom': ('madison-dining', 'Dining area with a dark wood table and cream chairs beside the kitchen', '50% 50%', False),  # madison-bedroom when 192smadison-24 arrives
+    'Photo: living room with character': ('brick-living', 'Living room with exposed brick walls and mid century chairs', '50% 50%', False),
     'Photo: back patio or yard': ('patio-firepit', 'Stone patio with built in seating around a fire pit', '50% 60%', False),
     'Photo: a short stay home, staged and guest ready': ('backyard-hot-tub', 'Backyard with a hot tub, fire pit, and stone seating', '55% 60%', False),
     'Photo: a furnished monthly home, lived in and calm': ('brick-reading-nook', 'Sitting area with two leather chairs against an exposed brick wall', '50% 55%', False),
     'Photo: the home, guest ready': ('living-lounge', 'Living room with an orange sofa and tall windows', '45% 50%', False),
 }
+def bust(html):
+    """Add a content hash to every /assets/img URL. /assets/* is served immutable, so a changed photo needs a new URL."""
+    import re
+    return re.sub(r'(/assets/img/[\w/.-]+?\.(?:webp|png|jpg))(?![\w?])', lambda m: m.group(1) + '?v=' + _v(m.group(1).lstrip('/')), html)
+
 def photos(html):
     import re
     def sub(m):
@@ -329,9 +335,9 @@ SHOW_HOMES = True  # Review preview only. Set False at launch unless names, clas
 def homes():
     if not SHOW_HOMES:
         return ''
-    labels = ['Photo: featured managed home, exterior at golden hour', 'Photo: living room, morning light',
-              'Photo: kitchen, staged and guest ready', 'Photo: primary bedroom', 'Photo: back patio or yard']
-    items = ''.join(f'<figure class="card"><div class="photo{" alt" if i % 2 else ""}" data-label="{l}"></div></figure>' for i, l in enumerate(labels))
+    labels = ['Photo: featured managed home, exterior at golden hour', 'Photo: kitchen, staged and guest ready',
+              'Photo: primary bedroom', 'Photo: living room with character', 'Photo: back patio or yard']
+    items = ''.join(f'<figure class="card"><div class="photo" data-label="{l}"></div></figure>' for l in labels)
     return f"""<section class="homes" id="homes">
   <div class="wrap head"><h2 class="word rv">Homes.</h2><p class="lede" style="font-size:19px;line-height:1.5;max-width:46ch">A few of the homes we manage across Denver Metro.</p><p class="hint small">Scroll sideways</p></div>
   <div class="strip" tabindex="0" aria-label="Managed homes gallery">{items}</div>
@@ -431,7 +437,7 @@ home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denv
   </div>
 </div></section>
 """ + people() + homes() + split_home() + letter() + metro() + ask('home') + footer()
-(SITE / 'index.html').write_text(photos(home))
+(SITE / 'index.html').write_text(bust(photos(home)))
 
 # ---------------- Operations ----------------
 ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denver',
@@ -517,7 +523,7 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
   </div>
 </div></section>
 ''' + split('operations') + ask('operations') + footer()
-(SITE / 'operations.html').write_text(photos(ops).replace('<section class="band">', '<section class="band">', 1))
+(SITE / 'operations.html').write_text(bust(photos(ops)).replace('<section class="band">', '<section class="band">', 1))
 
 # ---------------- Areas ----------------
 chips = ''.join(f'<button class="chip" type="button" data-city="{c}" aria-pressed="false">{c}</button>' for c in CITIES)

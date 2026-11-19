@@ -654,3 +654,7 @@ body{font-size:18px}
   .rp-stats{grid-template-columns:1fr 1fr}.rp-stats div:nth-child(3){border-left:0}.rp-stats div:nth-child(n+3){border-top:1px solid rgba(40,48,56,.12)}
   .rp-photos{grid-template-columns:1fr 1fr}.rp-zones,.rp-par{grid-template-columns:1fr}
 }
+/* v1.3 Homes carousel: every card the same size and shape (Matt, Nov 19) */
+.strip .card,.strip .card:first-child{flex:0 0 min(80vw,560px)}
+.strip .photo,.strip .card:first-child .photo{aspect-ratio:3/2}
+@media (max-width:700px){.strip .card,.strip .card:first-child{flex-basis:86vw}.strip .photo,.strip .card:first-child .photo{aspect-ratio:3/2}}
