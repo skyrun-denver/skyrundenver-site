@@ -9,7 +9,7 @@
     keys.forEach(function (k) {
       if (params.get(k)) sessionStorage.setItem('sr_' + k, params.get(k));
     });
-    if (!sessionStorage.getItem('sr_landing_page')) sessionStorage.setItem('sr_landing_page', location.pathname);
+    if (!sessionStorage.getItem('sr_landing_page')) sessionStorage.setItem('sr_landing_page', location.origin + location.pathname + location.search);
   } catch (e) {}
   document.querySelectorAll('form.eval').forEach(function (form) {
     keys.forEach(function (k) {
@@ -19,10 +19,43 @@
       if (f && v) f.value = v;
     });
     var lp = form.querySelector('input[name="skyrun_inquiry_landing_page"]');
-    if (lp) { try { lp.value = sessionStorage.getItem('sr_landing_page') || location.pathname; } catch (e) { lp.value = location.pathname; } }
-    form.addEventListener('submit', function () {
+    var here = location.origin + location.pathname;
+    if (lp) { try { lp.value = sessionStorage.getItem('sr_landing_page') || here; } catch (e) { lp.value = here; } }
+    form.addEventListener('submit', function (ev) {
+      if (form.dataset.sent) return;            // second pass: let the Netlify post go through
+      ev.preventDefault();
+      var err = form.querySelector('.form-err');
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      if (form.querySelector('input[name="company"]').value) return;   // honeypot filled: drop quietly
       var b = form.querySelector('button[type=submit]');
       if (b) { b.disabled = true; b.textContent = 'Sending'; }
+      if (err) err.hidden = true;
+      var names = ['firstname', 'lastname', 'email', 'phone', 'skyrun_property_city', 'skyrun_property_type', 'skyrun_rental_strategy',
+                   'skyrun_start_window', 'skyrun_discovery_channel', 'message', 'skyrun_inquiry_landing_page'];
+      var fields = [];
+      names.forEach(function (n) {
+        var el = form.elements[n];
+        if (el && el.value) fields.push({ objectTypeId: '0-1', name: n, value: el.value });
+      });
+      var hutk = (document.cookie.match(/(?:^|; )hubspotutk=([^;]+)/) || [])[1];
+      var ctx = { pageUri: location.href, pageName: document.title };
+      if (hutk) ctx.hutk = hutk;
+      var done = false;
+      var finish = function () {
+        if (done) return; done = true;
+        try { window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'generate_lead', form: 'property_evaluation', city: form.elements.skyrun_property_city.value }); } catch (e) {}
+        form.dataset.sent = '1';
+        HTMLFormElement.prototype.submit.call(form);   // Netlify copy and the thank you page
+      };
+      var url = 'https://api.hsforms.com/submissions/v3/integration/submit/' + form.dataset.hsPortal + '/' + form.dataset.hsForm;
+      try {
+        fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
+          body: JSON.stringify({ fields: fields, context: ctx }) })
+          .then(function (r) { if (!r.ok && window.console) console.warn('HubSpot submission', r.status); })
+          .catch(function () {})
+          .then(finish);
+      } catch (e) { finish(); }
+      setTimeout(finish, 4000);
     });
   });
 
@@ -31,7 +64,9 @@
   var formTitle = document.getElementById('ft');
   function setCity(name, scroll) {
     if (!citySel) return;
-    citySel.value = name;
+    var opt = Array.prototype.find.call(citySel.options, function (o) { return o.text === name || o.value === name; });
+    citySel.value = opt ? opt.value : '';
+    if (opt) name = opt.text;
     if (formTitle && formTitle.firstChild && formTitle.firstChild.nodeType === 3) formTitle.firstChild.nodeValue = name && name !== 'Another Denver Metro city' ? 'Tell us about your ' + name + ' property.' : 'Tell us about your property.';
     document.querySelectorAll('.chip').forEach(function (c) { c.setAttribute('aria-pressed', c.getAttribute('data-city') === name ? 'true' : 'false'); });
     document.querySelectorAll('.map .city').forEach(function (c) { c.classList.toggle('on', c.getAttribute('data-city') === name); });
@@ -48,7 +83,7 @@
     c.addEventListener('click', function () { setCity(c.getAttribute('data-city'), true); });
     c.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setCity(c.getAttribute('data-city'), true); } });
   });
-  if (citySel) citySel.addEventListener('change', function () { if (citySel.value) setCity(citySel.value, false); });
+  if (citySel) citySel.addEventListener('change', function () { if (citySel.value) setCity(citySel.options[citySel.selectedIndex].text, false); });
 
   // Phone CTA hides when the form is on screen.
   var m = document.querySelector('.mcta'), t = document.getElementById('evaluation'), hp = document.querySelector('.hero-photo');

@@ -103,7 +103,8 @@ def head(title, desc, path, extra=''):
 <link rel="stylesheet" href="/assets/css/site.css?v={CSS_V}">
 <link rel="icon" href="/assets/img/favicon.png" type="image/png">
 {extra}
-<!-- GA4: G-SFVBFCQWDM. Installed through Google Tag Manager at launch; see the measurement spec. -->
+{HS_TRACKING}
+<!-- GA4 and Google Ads tags go here once Sebastien grants access (Nov 19). -->
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -145,9 +146,26 @@ def footer():
 </html>
 '''
 
+# HubSpot (portal 247984825, form "skyrundenver.com Property Evaluation"). Option values are the
+# internal values of Sebastien's HubSpot properties; labels are his HubSpot labels.
+HS_PORTAL = '247984825'
+HS_FORM = 'eaa2f3be-9d2d-499a-ac90-660144fdbfbb'
+HS_TYPES = [('single_family_house', 'Single-family house'), ('townhome', 'Townhome'), ('condominium', 'Condominium'),
+            ('duplex_or_multifamily', 'Duplex or multifamily'), ('apartment', 'Apartment'), ('other', 'Other')]
+HS_STRATEGY = [('short_stays_under_30_days', 'Short stays (under 30 days)'), ('furnished_stays_30_days', 'Furnished stays (30+ days)'),
+               ('hybrid_or_flexible', 'Hybrid or flexible'), ('not_sure_yet', 'Not sure yet')]
+HS_START = [('as_soon_as_property_is_ready', 'As soon as the property is ready'), ('within_1_3_months', 'Within 1 to 3 months'),
+            ('within_3_6_months', 'Within 3 to 6 months'), ('more_than_6_months', 'More than 6 months'), ('exploring_options', 'Exploring options')]
+HS_FOUND = [('google_search', 'Google search'), ('google_maps', 'Google Maps'), ('existing_owner_referral', 'Referral from a SkyRun owner'),
+            ('realtor_referral', 'Realtor referral'), ('other_referral', 'Other referral'), ('social_media', 'Social media'),
+            ('direct_mail', 'Direct mail'), ('other_or_not_sure', 'Other or not sure')]
+HS_TRACKING = '<script id="hs-script-loader" async defer src="https://js-na2.hs-scripts.com/247984825.js"></script>'
+
 def form(page_label):
-    opts = ''.join(f'<option>{c}</option>' for c in CITIES) + '<option>Another Denver Metro city</option>'
-    return f'''<form class="eval" name="property-evaluation" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="company" novalidate>
+    opts = ''.join(f'<option value="{c.lower().replace(" ", "_")}">{c}</option>' for c in CITIES) + '<option value="other_needs_territory_approval">Another Denver Metro city</option>'
+    def sel(pairs):
+        return ''.join(f'<option value="{v}">{t}</option>' for v, t in pairs)
+    return f'''<form class="eval" name="property-evaluation" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="company" data-hs-do-not-collect="true" data-hs-portal="{HS_PORTAL}" data-hs-form="{HS_FORM}" novalidate>
     <input type="hidden" name="form-name" value="property-evaluation">
     <p class="hp" aria-hidden="true"><label>Company <input name="company" tabindex="-1" autocomplete="off"></label></p>
     <div class="f"><label for="first">First name</label><input id="first" name="firstname" autocomplete="given-name" required></div>
@@ -155,14 +173,15 @@ def form(page_label):
     <div class="f"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
     <div class="f"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
     <div class="f"><label for="city">Property city</label><select id="city" name="skyrun_property_city" required><option value="">Choose</option>{opts}</select></div>
-    <div class="f"><label for="type">Property type</label><select id="type" name="skyrun_property_type"><option value="">Choose</option><option>House</option><option>Townhome</option><option>Condo</option><option>ADU or carriage house</option></select></div>
-    <div class="f full"><label for="strategy">Rental approach you are considering</label><select id="strategy" name="skyrun_rental_strategy"><option value="">Choose</option><option>Short-term rental</option><option>Furnished 30+ day rental</option><option>Undecided</option></select></div>
-    <div class="f"><label for="start">Target start</label><select id="start" name="skyrun_start_window"><option value="">Choose</option><option>Within 30 days</option><option>1 to 3 months</option><option>3 to 6 months</option><option>More than 6 months</option><option>Just exploring</option></select></div>
-    <div class="f"><label for="found">How did you hear about us</label><select id="found" name="skyrun_discovery_channel"><option value="">Choose</option><option>Google search</option><option>Google Maps</option><option>Referral from an owner or friend</option><option>SkyRun.com</option><option>Social media</option><option>Other</option></select></div>
+    <div class="f"><label for="type">Property type</label><select id="type" name="skyrun_property_type"><option value="">Choose</option>{sel(HS_TYPES)}</select></div>
+    <div class="f full"><label for="strategy">Rental approach you are considering</label><select id="strategy" name="skyrun_rental_strategy"><option value="">Choose</option>{sel(HS_STRATEGY)}</select></div>
+    <div class="f"><label for="start">Target start</label><select id="start" name="skyrun_start_window"><option value="">Choose</option>{sel(HS_START)}</select></div>
+    <div class="f"><label for="found">How did you hear about us</label><select id="found" name="skyrun_discovery_channel"><option value="">Choose</option>{sel(HS_FOUND)}</select></div>
     <div class="f full"><label for="notes">Anything we should know (optional)</label><textarea id="notes" name="message"></textarea></div>
     <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_term"><input type="hidden" name="utm_content"><input type="hidden" name="gclid"><input type="hidden" name="skyrun_inquiry_landing_page" value="{page_label}">
     <label class="consent"><input type="checkbox" name="consent" value="yes" required> I agree to be contacted by SkyRun Denver about my property.</label>
     <button class="btn" type="submit">Request a property evaluation</button>
+    <p class="form-err small" role="alert" hidden></p>
     <p class="privacy">We use what you send here to follow up about your property and nothing else. <a href="/privacy">Privacy policy</a>.</p>
   </form>'''
 
