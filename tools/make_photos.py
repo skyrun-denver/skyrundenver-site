@@ -20,7 +20,7 @@ from grade import grade
 OUT = Path(__file__).resolve().parent.parent / 'assets/img/homes'
 # output name: (source file, horizontal focus 0..1, vertical focus 0..1)
 SOURCES = {
-    'parker-twilight':    ('hero-parker-twilight.jpg', .5, .5, 'twilight'),  # 6795 (Parker), hero. Track copy is 1280px; swap in the photographer's original when it arrives
+    'rooftop-skyline':    ('hero-king-rooftop.jpg', .5, .5),  # King St, hero. 3600px original from SkyRun Denver's Track photos
     'living-kitchen':     ('ogden-int.bin', .5, .5),          # Ogden
     'townhome-exterior':  ('ogden-ext.bin', .5, .5),          # Ogden
     'backyard-hot-tub':   ('bannock-ext-avif.bin', .5, .5),   # Bannock
@@ -56,7 +56,7 @@ def main(src, only=()):
             im = im.filter(ImageFilter.UnsharpMask(radius=1.2, percent=40, threshold=2))
         else:
             im = grade(im)
-        sizes = [w for w in ((800, 1440, 2400) if name == 'parker-twilight' else (800, 1440)) if w <= max(im.width, 1440)]
+        sizes = [w for w in ((800, 1440, 2400) if name == 'rooftop-skyline' else (800, 1440)) if w <= max(im.width, 1440)]
         for w in sizes:
             out = im.resize((w, round(w / 1.5)), Image.LANCZOS)
             out.save(OUT / f'{name}-{w}.webp', 'WEBP', quality=82, method=6)
