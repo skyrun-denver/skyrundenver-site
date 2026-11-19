@@ -464,17 +464,56 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
     <h2 class="word rv">The <em class="acc">record.</em></h2>
     <p class="lede" style="margin-top:18px"><strong style="color:var(--ink)">Documented after every stay.</strong></p>
     <p class="lede">Not a monthly summary. The actual checklist, photos, counts, and issues from each turnover, kept on the home's record.</p>
+    <ul class="rp-holds">
+      <li><b>Checklist by zone.</b> Every room and outdoor space, marked complete or flagged.</li>
+      <li><b>Time stamped photos.</b> What the home looked like before the next guest arrived.</li>
+      <li><b>Issues and who fixed them.</b> What was found, where it was routed, and when it closed.</li>
+      <li><b>Supply counts.</b> Restocked against your home's par levels, so nothing runs out mid stay.</li>
+    </ul>
     <p class="small" style="margin-top:20px">StayReady executes and documents its assigned field work. SkyRun Denver shares what matters with you.</p>
   </div>
-  <div class="stmt" aria-label="Sample owner record">
-    <div class="top"><span>Wash Park home</span><span>Turn closed 3:10 PM</span></div>
-    <div class="grid">
-      <div class="cell"><b>8</b><span>zones checked</span></div>
-      <div class="cell"><b>0</b><span>items failed</span></div>
-      <div class="cell"><b>14</b><span>photos attached</span></div>
-      <div class="cell"><b>1</b><span>issue found and fixed</span></div>
+  <div class="report rv" aria-label="Sample turnover report">
+    <div class="rp-head">
+      <div><p class="rp-lbl">Sample turnover report</p><p class="rp-title">Wash Park home</p></div>
+      <span class="rp-status">Guest ready</span>
     </div>
-        <p class="note">Sample record. Figures vary by home and stay.</p>
+    <dl class="rp-meta"><div><dt>Inspected by</dt><dd>StayReady</dd></div><div><dt>Turn closed</dt><dd>3:10 PM</dd></div><div><dt>Next arrival</dt><dd>4:00 PM</dd></div></dl>
+    <div class="rp-stats">
+      <div><b>8</b><span>zones checked</span></div>
+      <div><b>14</b><span>photos attached</span></div>
+      <div><b>1</b><span>issue fixed same day</span></div>
+      <div><b>0</b><span>open items at check in</span></div>
+    </div>
+    <div class="rp-sec">
+      <div class="rp-sec-h"><span class="rp-n">01</span><h3>Photo record</h3><span class="rp-count">14 photos</span></div>
+      <div class="rp-photos">
+        <figure><img src="/assets/img/homes/living-room-800.webp" alt="" loading="lazy" decoding="async"><figcaption>Living room</figcaption></figure>
+        <figure><img src="/assets/img/homes/open-living-800.webp" alt="" loading="lazy" decoding="async"><figcaption>Kitchen and dining</figcaption></figure>
+        <figure><img src="/assets/img/homes/brick-reading-nook-800.webp" alt="" loading="lazy" decoding="async"><figcaption>Reading nook</figcaption></figure>
+        <figure class="more"><img src="/assets/img/homes/patio-firepit-800.webp" alt="" loading="lazy" decoding="async"><figcaption>Patio</figcaption><span>+10</span></figure>
+      </div>
+    </div>
+    <div class="rp-sec">
+      <div class="rp-sec-h"><span class="rp-n">02</span><h3>Readiness checklist</h3><span class="rp-count">8 of 8 zones</span></div>
+      <ul class="rp-zones">
+        <li>Entry and access</li><li>Kitchen</li><li>Living areas</li><li>Bedrooms</li>
+        <li>Bathrooms</li><li>Linens staged</li><li>Supplies to par</li><li>Outdoor spaces</li>
+      </ul>
+    </div>
+    <div class="rp-sec">
+      <div class="rp-sec-h"><span class="rp-n">03</span><h3>Issues and routing</h3><span class="rp-count">2 logged, 0 open</span></div>
+      <ul class="rp-issues">
+        <li><div><b>Primary bath fan loose</b><span>Found at 1:40 PM inspection. Routed to maintenance, tightened 2:30 PM, before and after photos attached.</span></div><em class="ok">Fixed</em></li>
+        <li><div><b>Phone charger left in bedroom 2</b><span>Bagged, labeled, and logged for the guest.</span></div><em>Logged</em></li>
+      </ul>
+    </div>
+    <div class="rp-sec">
+      <div class="rp-sec-h"><span class="rp-n">04</span><h3>Supply counts</h3><span class="rp-count">Counted against par</span></div>
+      <ul class="rp-par">
+        <li><span>Coffee pods</span><b>20 of 20</b></li><li><span>Paper towels</span><b>6 of 6</b></li><li><span>Dish pods</span><b>24 of 24</b></li><li><span>Bath towels</span><b>8 of 8</b></li>
+      </ul>
+    </div>
+    <p class="note">Sample record. Figures vary by home and stay.</p>
   </div>
 </div></section>
 ''' + split('operations') + ask('operations') + footer()
