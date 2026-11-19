@@ -42,7 +42,7 @@ def photos(html):
     return re.sub(r'<div class="(photo[^"]*)"(?: style="[^"]*")? data-label="([^"]*)"></div>', sub, html)
 
 RULES_REVIEWED = 'November 12, 2026'
-RULES_TAG = '[Draft, pending SkyRun Denver sign off]'
+RULES_TAG = ''  # Rules approved for launch with the site (Nov 19)
 RULES = {
     'Denver': ('A short-term rental license covers stays of 29 nights or fewer and requires the home to be the host\'s primary residence. Stays of 30 nights or more fall under the residential rental property license instead.', 'https://denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Business-Licensing/Business-licenses/Short-term-rentals'),
     'Arvada': ('A short-term rental permit and a city business license are both required. Under rules in effect since May 1, 2026, one permit is allowed per lot (the main home or an accessory unit, not both), occupancy is two per bedroom plus two, and a home may operate up to 240 days in any 365.', 'https://www.arvadaco.gov/1507/Operating-a-short-term-rental'),
@@ -134,10 +134,10 @@ def header(current, dark=False, over=False):
 def footer():
     return f'''</main>
 <footer class="site-foot"><div class="wrap">
-  <div><a class="logo" href="/"><img src="/assets/img/skyrun-denver-horizontal.png" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"></a><p class="pend" style="margin-top:12px">SkyRun Denver is an independently owned and operated SkyRun Vacation Rentals location. [Working wording; corporate approved disclosure pending]</p></div>
+  <div><a class="logo" href="/"><img src="/assets/img/skyrun-denver-horizontal.png" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"></a><p class="small" style="margin-top:12px">SkyRun Denver is an independently owned and operated SkyRun Vacation Rentals location.</p></div>
   <div><h4>Contact</h4><p><a href="tel:+17207281997">720-728-1997</a></p><p><a href="mailto:denver@skyrun.com">denver@skyrun.com</a></p><p>Locally owned and operated. Serving the Denver Metro area, including Denver, Arvada, Wheat Ridge, Lakewood, Englewood and Centennial.</p></div>
   <div><h4>Homeowners</h4><p><a href="/#paths">Two ways to rent</a></p><p><a href="/#ready">5-Star Ready</a></p><p><a href="/operations">Operations</a></p><p><a href="/areas">Areas we serve</a></p><p><a href="https://skyrun.com/blog/category/denver/" rel="noopener">Insights</a></p><p><a href="/#evaluation">Request a property evaluation</a></p></div>
-  <div><h4>Owners</h4><p><a href="https://skyrundenver.trackhs.com/owner/" rel="noopener">Owner login</a></p><p><a href="https://skyrun.com/privacy-policy/" rel="noopener">Privacy</a></p></div>
+  <div><h4>Owners</h4><p><a href="https://skyrundenver.trackhs.com/owner/" rel="noopener">Owner login</a></p><p><a href="/privacy">Privacy</a></p></div>
 </div></footer>
 <a class="btn mcta" href="#evaluation">Request a property evaluation</a>
 <script src="/assets/js/site.js?v={JS_V}" defer></script>
@@ -163,7 +163,7 @@ def form(page_label):
     <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_term"><input type="hidden" name="utm_content"><input type="hidden" name="gclid"><input type="hidden" name="skyrun_inquiry_landing_page" value="{page_label}">
     <label class="consent"><input type="checkbox" name="consent" value="yes" required> I agree to be contacted by SkyRun Denver about my property.</label>
     <button class="btn" type="submit">Request a property evaluation</button>
-    <p class="privacy">We use what you send here to follow up about your property and nothing else. <a href="https://skyrun.com/privacy-policy/" rel="noopener">Privacy policy</a>. [Corporate to confirm the policy covers this site, the form, and analytics]</p>
+    <p class="privacy">We use what you send here to follow up about your property and nothing else. <a href="/privacy">Privacy policy</a>.</p>
   </form>'''
 
 def ask(page_label):
@@ -179,7 +179,7 @@ def ask(page_label):
 '''
 
 def areas_table():
-    rows = ''.join(f'<tr><td>{c}</td><td>{RULES[c][0]} <span class="small">Reviewed {RULES_REVIEWED}. {RULES_TAG}</span></td><td><a href="#evaluation" data-city="{c}">Start in {c}</a></td></tr>' for c in CITIES)
+    rows = ''.join(f'<tr><td>{c}</td><td>{RULES[c][0]} <span class="small">Reviewed {RULES_REVIEWED}.</span></td><td><a href="#evaluation" data-city="{c}">Start in {c}</a></td></tr>' for c in CITIES)
     return f'''<section class="areas" id="areas"><div class="wrap">
   <h2 class="word rv">Six <em class="acc">cities.</em></h2>
   <p class="lede" style="font-size:19px;line-height:1.5;max-width:46ch">Where we work, and what each one asks of you.</p>
@@ -212,7 +212,7 @@ def split(page='home'):
       <li><b>Money.</b> Monthly owner statements and distribution of net proceeds under the management agreement. Applicable lodging tax coordinated where SkyRun Denver controls the receipts.</li>
       <li><b>Rules.</b> Help understanding rental eligibility and local licensing. Licenses and permits stay in your name.</li>
     </ul>
-    <p class="part">SkyRun Denver is an independently owned and operated SkyRun Vacation Rentals location. [Working wording; corporate approved disclosure pending]</p>
+    <p class="part">SkyRun Denver is an independently owned and operated SkyRun Vacation Rentals location.</p>
   </div>
   <div class="col">
     <h3>Field operations by StayReady</h3>
@@ -286,20 +286,21 @@ def ready():
 # Direction C (approved by Matt, Nov 18): people first. Until real photos exist these render as labeled
 # placeholders on the private draft site. Before launch, add the files and set the names, or remove the blocks.
 SEB_PORTRAIT = None   # e.g. 'sebastien-portrait' (assets/img/people/<name>-800.webp), square crop for the hero card
+SEB_LETTER = None     # e.g. 'sebastien-vertical' (assets/img/people/<name>-800.webp), vertical portrait beside the letter
 TEAM_PHOTO = None     # e.g. 'denver-team' (assets/img/people/<name>-1440.webp), wide, the team at a managed home
 
 def lead_card():
     if SEB_PORTRAIT:
         ph = f'<img class="ph" src="/assets/img/people/{SEB_PORTRAIT}-800.webp" alt="Sebastien Guite" width="64" height="64">'
     else:
-        ph = '<div class="ph" role="img" aria-label="Photo needed">Photo needed</div>'
+        return ''  # hidden until the portrait arrives
     return f'<div class="lead-card">{ph}<p><b>Sebastien Guite</b><br>Location Owner, SkyRun Vacation Rentals Denver Metro</p></div>'
 
 def people():
     if TEAM_PHOTO:
         return (f'<section class="people" aria-label="The SkyRun Denver team"><div class="photo has-img"><img src="/assets/img/people/{TEAM_PHOTO}-1440.webp" '
                 f'srcset="/assets/img/people/{TEAM_PHOTO}-800.webp 800w, /assets/img/people/{TEAM_PHOTO}-1440.webp 1440w" sizes="100vw" alt="The SkyRun Denver team at a managed home" loading="lazy" decoding="async"></div></section>\n')
-    return '<section class="people" aria-hidden="true"><div class="ph"><span>Photo needed: the Denver team at a managed home</span></div></section>\n'
+    return ''  # hidden until the team photo arrives
 
 SHOW_HOMES = True  # Review preview only. Set False at launch unless names, classifications, images and permissions are verified.
 
@@ -316,8 +317,9 @@ def homes():
 """
 
 def letter():
+    portrait = (f'<div class="photo has-img" style="margin-top:28px"><img src="/assets/img/people/{SEB_LETTER}-800.webp" alt="Sebastien Guite" loading="lazy" decoding="async"></div>' if SEB_LETTER else '')
     return '''<section class="letter" id="letter"><div class="wrap">
-  <div><p class="kicker">From Sebastien</p><h2 class="h2 rv">I'd rather give you a plan that holds up than <em class="acc">a number that sounds good.</em></h2><div class="photo alt" style="margin-top:28px" data-label="Photo needed: Sebastien, vertical, at a managed home"></div></div>
+  <div><p class="kicker">From Sebastien</p><h2 class="h2 rv">I'd rather give you a plan that holds up than <em class="acc">a number that sounds good.</em></h2>''' + portrait + '''</div>
   <div class="card rv d1">
     <p>I'm Sebastien, owner of SkyRun Denver.</p>
     <p>I believe there's a big difference between getting a property booked and managing it well.</p>
@@ -365,7 +367,7 @@ home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denv
     </div>
   </div>
   <div class="cal" aria-label="An illustrative month: short stays, turnovers, a property care visit, and a furnished 30+ day stay">
-    <div class="head"><b>November</b><span class="tag">Illustrative month</span></div>
+    <div class="head"><b>November</b></div>
     <div class="grid7" role="img" aria-label="Illustrative calendar: short stays with a turnover after each one, a property care visit on the 12th, an issue flagged and routed on the 16th, and a furnished stay that begins on the 24th and runs to December 23. Seven numbered entries are listed below.">
       <div class="d b n" data-n="1">1</div><div class="d b">2</div><div class="d t n" data-n="2">3<em>turn</em></div><div class="d b">4</div><div class="d b">5</div><div class="d b">6</div><div class="d t">7<em>turn</em></div>
       <div class="d b n" data-n="3">8</div><div class="d b">9</div><div class="d t">10<em>turn</em></div><div class="d b">11</div><div class="d b s n" data-n="4">12<em>care</em></div><div class="d b">13</div><div class="d t">14<em>turn</em></div>
@@ -397,7 +399,7 @@ home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denv
     <p class="small" style="margin-top:20px">Illustrative statement. Actual owner financial records remain private.</p>
   </div>
   <div class="stmt" aria-label="Illustrative owner statement">
-    <div class="top"><span>Wash Park home</span><span class="tag">Illustrative</span></div>
+    <div class="top"><span>Wash Park home</span></div>
     <div class="grid">
       <div class="cell"><b>23</b><span>short stay nights, 7 turnovers</span></div>
       <div class="cell"><b>7</b><span>furnished stay nights in November</span></div>
@@ -423,10 +425,10 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
   <div class="cal" aria-label="One turnover, hour by hour"><div class="ledger">
     <div class="head"><span>Time</span><span>What happened</span><span style="text-align:right">Who</span></div>
     <div class="row"><span class="t big">10:00</span><div><h3>Guests check out</h3><p>Smart lock code expires. Checkout photos requested from the guest.</p></div><span class="who">SkyRun Denver</span></div>
-    <div class="row"><span class="t big">10:40</span><div><h3>Cleaning team arrives</h3><p>Two person crew working the <a href="https://www.gostayready.com/turnover-cleaning" rel="noopener">turnover checklist</a> across eight zones: kitchen, baths, floors, every surface.</p><div class="photo" data-label="Photo: crew arrival"></div></div><span class="who">StayReady cleaning</span></div>
+    <div class="row"><span class="t big">10:40</span><div><h3>Cleaning team arrives</h3><p>Two person crew working the <a href="https://www.gostayready.com/turnover-cleaning" rel="noopener">turnover checklist</a> across eight zones: kitchen, baths, floors, every surface.</p></div><span class="who">StayReady cleaning</span></div>
     <div class="row"><span class="t big">12:15</span><div><h3>Linens swapped, not washed onsite</h3><p>Fresh set from the linen program. Used set bagged for the laundry route.</p></div><span class="who">StayReady linens</span></div>
     <div class="row"><span class="t big">1:05</span><div><h3>Restocked to par</h3><p>Paper, soap, coffee, dish pods. Counts logged against the home's par list.</p></div><span class="who">StayReady restocking</span></div>
-    <div class="row"><span class="t big">1:40</span><div><h3>Inspection, every room</h3><p>A <a href="https://www.gostayready.com/inspections" rel="noopener">readiness inspection</a>: appliances, fixtures, locks, thermostat, staging. Loose bath fan noted and sent to maintenance.</p><div class="photo alt" data-label="Photo: inspection"></div></div><span class="who">StayReady inspection</span></div>
+    <div class="row"><span class="t big">1:40</span><div><h3>Inspection, every room</h3><p>A <a href="https://www.gostayready.com/inspections" rel="noopener">readiness inspection</a>: appliances, fixtures, locks, thermostat, staging. Loose bath fan noted and sent to maintenance.</p></div><span class="who">StayReady inspection</span></div>
     <div class="row"><span class="t big">2:30</span><div><h3>Bath fan tightened</h3><p>Same day. Before and after photos attached to the home's record.</p></div><span class="who">StayReady maintenance</span></div>
     <div class="row"><span class="t big now">3:10</span><div><h3>Guest ready</h3><p>Record closed. Every step, photo, and count documented for the home.</p></div><span class="who">SkyRun Denver</span></div>
     <div class="row"><span class="t big">4:00</span><div><h3>Next guests check in</h3><p>New lock code live. Welcome message sent.</p></div><span class="who">SkyRun Denver</span></div>
@@ -434,25 +436,23 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
   </div></div>
 </div></section>
 
-<section class="band"><div class="photo rv" data-label="Photo: the StayReady crew at work in a Denver home, full width, licensed and credited"></div><p class="cap">[Caption: the home, the crew, the photographer]</p></section>
 
 <section class="record" id="record"><div class="wrap">
   <div>
     <h2 class="word rv">The <em class="acc">record.</em></h2>
     <p class="lede" style="margin-top:18px"><strong style="color:var(--ink)">Documented after every stay.</strong></p>
     <p class="lede">Not a monthly summary. The actual checklist, photos, counts, and issues from each turnover, kept on the home's record.</p>
-    <p class="small" style="margin-top:20px">StayReady executes and documents its assigned field work. SkyRun Denver shares what matters with you. [How and when owners see this record is being confirmed; no owner portal delivery is promised until it is]</p>
+    <p class="small" style="margin-top:20px">StayReady executes and documents its assigned field work. SkyRun Denver shares what matters with you.</p>
   </div>
   <div class="stmt" aria-label="Sample owner record">
-    <div class="top"><span>[Home name], Wash Park</span><span>Turn closed 3:10 PM</span></div>
+    <div class="top"><span>Wash Park home</span><span>Turn closed 3:10 PM</span></div>
     <div class="grid">
-      <div class="cell"><b>112</b><span>checklist items passed</span></div>
+      <div class="cell"><b>8</b><span>zones checked</span></div>
       <div class="cell"><b>0</b><span>items failed</span></div>
       <div class="cell"><b>14</b><span>photos attached</span></div>
       <div class="cell"><b>1</b><span>issue found and fixed</span></div>
     </div>
-    <div class="photos"><div class="photo"></div><div class="photo alt"></div><div class="photo"></div><div class="photo alt"></div><div class="photo"></div><div class="photo alt"></div></div>
-    <p class="note">Sample figures. Real records replace these at launch.</p>
+        <p class="note">Sample record. Figures vary by home and stay.</p>
   </div>
 </div></section>
 ''' + split('operations') + ask('operations') + footer()
@@ -460,7 +460,7 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
 
 # ---------------- Areas ----------------
 chips = ''.join(f'<button class="chip" type="button" data-city="{c}" aria-pressed="false">{c}</button>' for c in CITIES)
-rules = ''.join(f'<li><b>{c}<small>Reviewed {RULES_REVIEWED}</small></b><p>{RULES[c][0]} <a href="{RULES[c][1]}" rel="noopener" class="src">City source</a>. <a href="#evaluation" data-city="{c}">Start in {c}</a></p><p class="small pend">{RULES_TAG}</p></li>' for c in CITIES)
+rules = ''.join(f'<li><b>{c}<small>Reviewed {RULES_REVIEWED}</small></b><p>{RULES[c][0]} <a href="{RULES[c][1]}" rel="noopener" class="src">City source</a>. <a href="#evaluation" data-city="{c}">Start in {c}</a></p></li>' for c in CITIES)
 areas = head('Areas We Serve | Denver, Arvada, Wheat Ridge, Lakewood, Englewood, Centennial | SkyRun Denver',
              'SkyRun Denver manages short-term and furnished rentals in Denver, Arvada, Wheat Ridge, Lakewood, Englewood, and Centennial. Each city has its own rules; the evaluation starts with yours.', '/areas') + header('areas', dark=True) + f'''
 <section class="maphero"><div class="wrap">
@@ -486,6 +486,9 @@ areas = head('Areas We Serve | Denver, Arvada, Wheat Ridge, Lakewood, Englewood,
 (SITE / 'areas.html').write_text(areas)
 
 # ---------------- Thank you ----------------
+def fix_cta(html):
+    return html.replace('href="#evaluation"', 'href="/#evaluation"')
+
 thanks = head('Evaluation Requested | SkyRun Denver', 'Your property evaluation request is in. The SkyRun Denver team follows up to schedule a walkthrough.', '/thank-you',
               '<meta name="robots" content="noindex">') + header('thanks') + '''
 <section class="thanks"><div class="wrap">
@@ -495,7 +498,70 @@ thanks = head('Evaluation Requested | SkyRun Denver', 'Your property evaluation 
   <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn ghost" href="/operations">See what happens between guests</a><a class="btn ghost" href="/areas">Read your city's rules</a></div>
 </div></section>
 ''' + footer().replace('<a class="btn mcta" href="#evaluation">Request a property evaluation</a>', '')
-(SITE / 'thank-you.html').write_text(thanks)
+(SITE / 'thank-you.html').write_text(fix_cta(thanks))
+
+# ---------------- Privacy ----------------
+def fix_cta(html):
+    return html.replace('href="#evaluation"', 'href="/#evaluation"')
+
+privacy = head('Privacy | SkyRun Denver', 'How SkyRun Denver collects, uses, and protects the information you share through skyrundenver.com.', '/privacy') + header('privacy', dark=True) + """
+<section class="legal"><div class="wrap">
+  <p class="kicker">Privacy</p>
+  <h1 class="h2">How we handle your information.</h1>
+  <p class="small">Effective November 19, 2026</p>
+  <p>This notice covers skyrundenver.com, operated by SkyRun Denver, an independently owned and operated SkyRun Vacation Rentals location serving the Denver Metro area. It explains what we collect through this site, how we use it, and the choices you have.</p>
+
+  <h2>What we collect</h2>
+  <p><b>Information you give us.</b> When you request a property evaluation, we collect your name, email, phone number, property city, property type, the rental approach you are considering, your target start, how you heard about us, and anything you add in the notes field.</p>
+  <p><b>Information collected automatically.</b> When you visit the site, we and our service providers may collect the page you arrived on, the referring page or campaign (such as UTM tags or a Google click ID), your browser and device type, and general location based on your IP address. Some of this is collected with cookies or similar technologies.</p>
+
+  <h2>How we use it</h2>
+  <ul>
+    <li>To respond to your inquiry, evaluate your property, and follow up about management.</li>
+    <li>To understand how owners find us and which pages and campaigns are useful.</li>
+    <li>To measure and improve our advertising, including showing relevant ads to people who visited the site.</li>
+    <li>To keep the site secure and working properly.</li>
+  </ul>
+  <p>We do not sell your personal information.</p>
+
+  <h2>Who we share it with</h2>
+  <p>We share information only with service providers that help us run the site and our business, such as our website host and form processor (Netlify), our customer relationship management system (HubSpot), analytics and advertising platforms (such as Google and Meta), and SkyRun Vacation Rentals systems used to manage owner relationships. We may also share information when required by law.</p>
+
+  <h2>Cookies and your choices</h2>
+  <p>You can block or delete cookies in your browser settings. You can manage ad personalization through <a href="https://adssettings.google.com" rel="noopener">Google Ads Settings</a> and your Facebook or Instagram ad preferences, and you can opt out of Google Analytics with the <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">Google Analytics opt out browser add on</a>.</p>
+  <p>If we contact you by email, you can unsubscribe at any time using the link in the message or by replying to ask us to stop.</p>
+
+  <h2>Access, correction, and deletion</h2>
+  <p>You can ask us what information we hold about you, ask us to correct it, or ask us to delete it. Email <a href="mailto:denver@skyrun.com">denver@skyrun.com</a> or call <a href="tel:+17207281997">720-728-1997</a>. We will respond within a reasonable time and may need to confirm your identity first.</p>
+
+  <h2>How long we keep it</h2>
+  <p>We keep inquiry information for as long as it is useful to respond to you and manage any resulting relationship, and as required for our records. We delete or anonymize it when it is no longer needed.</p>
+
+  <h2>Security</h2>
+  <p>We use reasonable safeguards to protect the information you share, including encrypted connections to this site. No method of transmission or storage is completely secure.</p>
+
+  <h2>Other sites</h2>
+  <p>This site links to other sites, including the owner login and SkyRun Vacation Rentals pages. Their privacy practices are governed by their own policies.</p>
+
+  <h2>Children</h2>
+  <p>This site is intended for property owners and is not directed to children under 13. We do not knowingly collect information from children.</p>
+
+  <h2>Changes and contact</h2>
+  <p>We may update this notice from time to time and will change the effective date above when we do. Questions can go to <a href="mailto:denver@skyrun.com">denver@skyrun.com</a>.</p>
+</div></section>
+""" + footer()
+(SITE / 'privacy.html').write_text(fix_cta(privacy))
+
+# ---------------- 404 ----------------
+nf = head('Page Not Found | SkyRun Denver', 'This page could not be found.', '/404', '<meta name="robots" content="noindex">') + header('404', dark=True) + """
+<section class="thanks"><div class="wrap">
+  <p class="kicker">Page not found</p>
+  <h1 class="h2">This page moved or never existed.</h1>
+  <p class="lede">Start from the homepage, or tell us about your property and we will take it from there.</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="/">Go to the homepage</a><a class="btn ghost" href="/#evaluation">Request a property evaluation</a></div>
+</div></section>
+""" + footer()
+(SITE / '404.html').write_text(fix_cta(nf))
 
 # ---------------- Support files ----------------
 (SITE / 'netlify.toml').write_text('''[build]
@@ -523,17 +589,20 @@ thanks = head('Evaluation Requested | SkyRun Denver', 'Your property evaluation 
 [context.branch-deploy]
   command = "printf '/*\\n  X-Robots-Tag: noindex\\n' >> _headers"
 ''')
-(SITE / '_redirects').write_text('''/index.html   /            301
-/operations.html  /operations  301
-/areas.html   /areas       301
-/thank-you.html  /thank-you  301
+(SITE / '_redirects').write_text('''/index.html   /            301!
+/operations.html  /operations  301!
+/areas.html   /areas       301!
+/thank-you.html  /thank-you  301!
+/privacy.html  /privacy  301!
+https://www.skyrundenver.com/*  https://skyrundenver.com/:splat  301!
 ''')
-(SITE / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /thank-you\nSitemap: {ORIGIN}/sitemap.xml\n')
+(SITE / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {ORIGIN}/sitemap.xml\n')
 (SITE / 'sitemap.xml').write_text(f'''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>{ORIGIN}/</loc><lastmod>2026-11-06</lastmod></url>
-  <url><loc>{ORIGIN}/operations</loc><lastmod>2026-11-06</lastmod></url>
-  <url><loc>{ORIGIN}/areas</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>{ORIGIN}/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>{ORIGIN}/operations</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>{ORIGIN}/areas</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>{ORIGIN}/privacy</loc><lastmod>2026-11-19</lastmod></url>
 </urlset>
 ''')
 (SITE / 'README.md').write_text('''# skyrundenver.com

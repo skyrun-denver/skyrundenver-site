@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /thank-you
 Sitemap: https://skyrundenver.com/sitemap.xml
