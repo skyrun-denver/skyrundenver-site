@@ -283,6 +283,24 @@ def ready():
 </div></section>
 '''
 
+# Direction C (approved by Matt, Nov 18): people first. Until real photos exist these render as labeled
+# placeholders on the private draft site. Before launch, add the files and set the names, or remove the blocks.
+SEB_PORTRAIT = None   # e.g. 'sebastien-portrait' (assets/img/people/<name>-800.webp), square crop for the hero card
+TEAM_PHOTO = None     # e.g. 'denver-team' (assets/img/people/<name>-1440.webp), wide, the team at a managed home
+
+def lead_card():
+    if SEB_PORTRAIT:
+        ph = f'<img class="ph" src="/assets/img/people/{SEB_PORTRAIT}-800.webp" alt="Sebastien Guite" width="64" height="64">'
+    else:
+        ph = '<div class="ph" role="img" aria-label="Photo needed">Photo needed</div>'
+    return f'<div class="lead-card">{ph}<p><b>Sebastien Guite</b><br>Location Owner, SkyRun Vacation Rentals Denver Metro</p></div>'
+
+def people():
+    if TEAM_PHOTO:
+        return (f'<section class="people" aria-label="The SkyRun Denver team"><div class="photo has-img"><img src="/assets/img/people/{TEAM_PHOTO}-1440.webp" '
+                f'srcset="/assets/img/people/{TEAM_PHOTO}-800.webp 800w, /assets/img/people/{TEAM_PHOTO}-1440.webp 1440w" sizes="100vw" alt="The SkyRun Denver team at a managed home" loading="lazy" decoding="async"></div></section>\n')
+    return '<section class="people" aria-hidden="true"><div class="ph"><span>Photo needed: the Denver team at a managed home</span></div></section>\n'
+
 SHOW_HOMES = True  # Review preview only. Set False at launch unless names, classifications, images and permissions are verified.
 
 def homes():
@@ -299,7 +317,7 @@ def homes():
 
 def letter():
     return '''<section class="letter" id="letter"><div class="wrap">
-  <div><p class="kicker">From Sebastien</p><h2 class="h2 rv">I'd rather give you a plan that holds up than <em class="acc">a number that sounds good.</em></h2><div class="photo alt" style="margin-top:28px" data-label="Photo: Sebastien and the Denver team"></div></div>
+  <div><p class="kicker">From Sebastien</p><h2 class="h2 rv">I'd rather give you a plan that holds up than <em class="acc">a number that sounds good.</em></h2><div class="photo alt" style="margin-top:28px" data-label="Photo needed: Sebastien, vertical, at a managed home"></div></div>
   <div class="card rv d1">
     <p>I'm Sebastien, owner of SkyRun Denver.</p>
     <p>I believe there's a big difference between getting a property booked and managing it well.</p>
@@ -334,6 +352,7 @@ home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denv
     <h1 class="disp">The right rental strategy. <em class="acc">A home that's ready for it.</em></h1>
     <p class="lede">We look at your goals, local rules, and operating costs before recommending short stays, furnished 30+ day rentals, or neither. If the property is a fit, we help get it ready and manage the details.</p>
     <div class="acts"><a class="btn sun" href="#evaluation">Request a property evaluation</a><a class="btn glass" href="#month">See how we work</a></div>
+    """ + lead_card() + """
   </div>
 </section>
 """ + paths() + cred() + ready() + voice() + f"""
@@ -387,7 +406,7 @@ home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denv
     </div>
   </div>
 </div></section>
-""" + homes() + split_home() + letter() + metro() + ask('home') + footer()
+""" + people() + homes() + split_home() + letter() + metro() + ask('home') + footer()
 (SITE / 'index.html').write_text(photos(home))
 
 # ---------------- Operations ----------------
