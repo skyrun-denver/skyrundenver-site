@@ -21,7 +21,7 @@ PHOTOS = {
     'Photo: the same home, interior, late afternoon, licensed and credited': ('living-kitchen', 'Open living room and kitchen in a managed Denver home', '50% 55%', False),
     'Photo: featured managed home, exterior at golden hour': ('townhome-exterior', 'Modern two story Denver townhome with a fenced front yard', '50% 50%', False),
     'Photo: kitchen, staged and guest ready': ('madison-kitchen', 'Kitchen with a waterfall island, pendant lights, and double ovens', '50% 50%', False),
-    'Photo: primary bedroom': ('madison-dining', 'Dining area with a dark wood table and cream chairs beside the kitchen', '50% 50%', False),  # madison-bedroom when 192smadison-24 arrives
+    'Photo: primary bedroom': ('madison-bedroom', 'Primary bedroom with blue pillows and a textured accent wall', '50% 50%', False),
     'Photo: living room with character': ('brick-living', 'Living room with exposed brick walls and mid century chairs', '50% 50%', False),
     'Photo: back patio or yard': ('patio-firepit', 'Stone patio with built in seating around a fire pit', '50% 60%', False),
     'Photo: a short stay home, staged and guest ready': ('backyard-hot-tub', 'Backyard with a hot tub, fire pit, and stone seating', '55% 60%', False),
@@ -493,10 +493,10 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
     <div class="rp-sec">
       <div class="rp-sec-h"><span class="rp-n">01</span><h3>Photo record</h3><span class="rp-count">14 photos</span></div>
       <div class="rp-photos">
-        <figure><img src="/assets/img/homes/living-room-800.webp" alt="" loading="lazy" decoding="async"><figcaption>Living room</figcaption></figure>
-        <figure><img src="/assets/img/homes/open-living-800.webp" alt="" loading="lazy" decoding="async"><figcaption>Kitchen and dining</figcaption></figure>
-        <figure><img src="/assets/img/homes/brick-reading-nook-800.webp" alt="" loading="lazy" decoding="async"><figcaption>Reading nook</figcaption></figure>
-        <figure class="more"><img src="/assets/img/homes/patio-firepit-800.webp" alt="" loading="lazy" decoding="async"><figcaption>Patio</figcaption><span>+10</span></figure>
+        <figure><img src="/assets/img/homes/madison-dining-800.webp" alt="" loading="lazy" decoding="async"><figcaption>Dining</figcaption></figure>
+        <figure><img src="/assets/img/homes/madison-primary-800.webp" alt="" loading="lazy" decoding="async"><figcaption>Primary bedroom</figcaption></figure>
+        <figure><img src="/assets/img/homes/madison-bath-800.webp" alt="" loading="lazy" decoding="async"><figcaption>Primary bath</figcaption></figure>
+        <figure class="more"><img src="/assets/img/homes/madison-courtyard-800.webp" alt="" loading="lazy" decoding="async"><figcaption>Courtyard</figcaption><span>+10</span></figure>
       </div>
     </div>
     <div class="rp-sec">

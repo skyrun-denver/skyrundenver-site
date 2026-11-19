@@ -31,8 +31,6 @@ SOURCES = {
     'madison-kitchen':    ('192smadison-8.jpg', .5, .5),      # 192 S Madison (Cabin Door Media)
     'madison-bedroom':    ('192smadison-24.jpg', .5, .5),
     'madison-dining':     ('192smadison-5.jpg', .5, .5),
-    'living-room':        ('madison-int.bin', .5, .5),        # 192 S Madison (report, until the one-home set lands)
-    'open-living':        ('allison-int.bin', .5, .5),        # 5360 Allison (report, until the one-home set lands)
     'madison-primary':    ('192smadison-22.jpg', .5, .5),
     'madison-bath':       ('192smadison-28.jpg', .5, .5),
     'madison-courtyard':  ('192smadison-18.jpg', .5, .5),
