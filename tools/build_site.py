@@ -104,6 +104,7 @@ def head(title, desc, path, extra=''):
 <link rel="icon" href="/assets/img/favicon.png" type="image/png">
 {extra}
 {HS_TRACKING}
+<meta name="msvalidate.01" content="4C8477B52376714CF481D739F1D6C362">
 <!-- GA4 and Google Ads tags go here once Sebastien grants access (Nov 19). -->
 </head>
 <body>
@@ -136,9 +137,9 @@ def footer():
     return f'''</main>
 <footer class="site-foot"><div class="wrap">
   <div><a class="logo" href="/"><img src="/assets/img/skyrun-denver-horizontal.png" width="922" height="267" alt="SkyRun Vacation Rentals, serving the Denver Metro Area"></a><p class="small" style="margin-top:12px">SkyRun Denver is an independently owned and operated SkyRun Vacation Rentals location.</p></div>
-  <div><h4>Contact</h4><p><a href="tel:+17207281997">720-728-1997</a></p><p><a href="mailto:denver@skyrun.com">denver@skyrun.com</a></p><p>Locally owned and operated. Serving the Denver Metro area, including Denver, Arvada, Wheat Ridge, Lakewood, Englewood and Centennial.</p></div>
-  <div><h4>Homeowners</h4><p><a href="/#paths">Two ways to rent</a></p><p><a href="/#ready">5-Star Ready</a></p><p><a href="/operations">Operations</a></p><p><a href="/areas">Areas we serve</a></p><p><a href="https://skyrun.com/blog/category/denver/" rel="noopener">Insights</a></p><p><a href="/#evaluation">Request a property evaluation</a></p></div>
-  <div><h4>Owners</h4><p><a href="https://skyrundenver.trackhs.com/owner/" rel="noopener">Owner login</a></p><p><a href="/privacy">Privacy</a></p></div>
+  <div><p class="fh">Contact</p><p><a href="tel:+17207281997">720-728-1997</a></p><p><a href="mailto:denver@skyrun.com">denver@skyrun.com</a></p><p>Locally owned and operated. Serving the Denver Metro area, including Denver, Arvada, Wheat Ridge, Lakewood, Englewood and Centennial.</p></div>
+  <div><p class="fh">Homeowners</p><p><a href="/#paths">Two ways to rent</a></p><p><a href="/#ready">5-Star Ready</a></p><p><a href="/operations">Operations</a></p><p><a href="/areas">Areas we serve</a></p><p><a href="https://skyrun.com/blog/category/denver/" rel="noopener">Insights</a></p><p><a href="/#evaluation">Request a property evaluation</a></p></div>
+  <div><p class="fh">Owners</p><p><a href="https://skyrundenver.trackhs.com/owner/" rel="noopener">Owner login</a></p><p><a href="/privacy">Privacy</a></p></div>
 </div></footer>
 <a class="btn mcta" href="#evaluation">Request a property evaluation</a>
 <script src="/assets/js/site.js?v={JS_V}" defer></script>
@@ -361,7 +362,7 @@ def metro():
     <p class="lede">We manage short-term and furnished rentals across the Denver Metro area. Location, local requirements, property condition, and your goals all help determine the right approach.</p>
     <p><a class="arrow" href="/areas">Explore our service areas</a></p>
   </div>
-  <a class="map mini" href="/areas" aria-label="Explore our service areas">{small_map}</a>
+  <div class="map mini">{small_map}<a class="map-link" href="/areas" aria-label="Explore our service areas"></a></div>
 </div></section>
 '''
 
@@ -443,7 +444,7 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
     <ol class="steps"><li>Plan the turn</li><li>Clean and reset</li><li>Flag and route issues</li><li>Confirm readiness for the next arrival</li></ol>
     <div class="acts"><a class="btn" href="#evaluation">Evaluate my property</a><a class="btn ghost" href="#record">See the record</a></div>
   </div>
-  <div class="cal" aria-label="One turnover, hour by hour"><div class="ledger">
+  <h2 class="sr-only">One turnover, hour by hour</h2><div class="cal" aria-label="One turnover, hour by hour"><div class="ledger">
     <div class="head"><span>Time</span><span>What happened</span><span style="text-align:right">Who</span></div>
     <div class="row"><span class="t big">10:00</span><div><h3>Guests check out</h3><p>Smart lock code expires. Checkout photos requested from the guest.</p></div><span class="who">SkyRun Denver</span></div>
     <div class="row"><span class="t big">10:40</span><div><h3>Cleaning team arrives</h3><p>Two person crew working the <a href="https://www.gostayready.com/turnover-cleaning" rel="noopener">turnover checklist</a> across eight zones: kitchen, baths, floors, every surface.</p></div><span class="who">StayReady cleaning</span></div>
@@ -614,6 +615,7 @@ nf = head('Page Not Found | SkyRun Denver', 'This page could not be found.', '/4
 /privacy.html  /privacy  301!
 https://www.skyrundenver.com/*  https://skyrundenver.com/:splat  301!
 ''')
+(SITE / '8c222801ef906b1e3962ef81529f8cab.txt').write_text('8c222801ef906b1e3962ef81529f8cab')  # IndexNow key
 (SITE / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {ORIGIN}/sitemap.xml\n')
 (SITE / 'sitemap.xml').write_text(f'''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
