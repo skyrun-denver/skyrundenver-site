@@ -421,8 +421,8 @@ def metro():
 '''
 
 # ---------------- Home ----------------
-home = head('SkyRun Denver | Short-Term and Furnished Rental Management for Denver Homeowners',
-            'SkyRun Denver manages short-term and furnished 30+ day rentals for homeowners in Denver, Arvada, Wheat Ridge, Lakewood, Englewood, and Centennial. Request a property evaluation.', '/', SCHEMA_HOME) + header('home', over=True) + """
+home = head('SkyRun Denver | Short-Term and Furnished Rental Management',
+            'SkyRun Denver manages short-term and furnished 30+ day rentals in Denver, Arvada, Wheat Ridge, Lakewood, Englewood, and Centennial.', '/', SCHEMA_HOME) + header('home', over=True) + """
 <section class="hero-photo">
   <div class="photo rv" data-label="Photo: a managed Denver home at golden hour, full bleed, licensed and credited"></div>
   <div class="wrap copy">
@@ -576,8 +576,8 @@ ops = head('Operations | What Happens to Your Home Between Guests | SkyRun Denve
 # ---------------- Areas ----------------
 chips = ''.join(f'<button class="chip" type="button" data-city="{c}" aria-pressed="false">{c}</button>' for c in CITIES)
 rules = ''.join(f'<li><b>{c}<small>Reviewed {RULES_REVIEWED}</small></b><p>{RULES[c][0]} <a href="{RULES[c][1]}" rel="noopener" class="src">City source</a>. <a href="#evaluation" data-city="{c}">Start in {c}</a></p></li>' for c in CITIES)
-areas = head('Areas We Serve | Denver, Arvada, Wheat Ridge, Lakewood, Englewood, Centennial | SkyRun Denver',
-             'SkyRun Denver manages short-term and furnished rentals in Denver, Arvada, Wheat Ridge, Lakewood, Englewood, and Centennial. Each city has its own rules; the evaluation starts with yours.', '/areas', crumbs('Areas We Serve', '/areas')) + header('areas', dark=True) + f'''
+areas = head('Areas We Serve | Denver Metro Rental Management | SkyRun Denver',
+             'Short-term and furnished rental management in Denver, Arvada, Wheat Ridge, Lakewood, Englewood, and Centennial. Each city has its own rules.', '/areas', crumbs('Areas We Serve', '/areas')) + header('areas', dark=True) + f'''
 <section class="maphero"><div class="wrap">
   <div>
     <h1>The Denver metro is not one <em class="acc">rental market.</em></h1>
