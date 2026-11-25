@@ -196,9 +196,10 @@ HS_FOUND = [('google_search', 'Google search'), ('google_maps', 'Google Maps'), 
 HS_TRACKING = '<script id="hs-script-loader" async defer src="https://js-na2.hs-scripts.com/247984825.js"></script>'
 
 # Ad and analytics tags. Each stays off until its ID is filled in (accounts are Sebastien's, per the HQ ruling).
-GA4_ID = ''          # Google Analytics 4 measurement ID, e.g. G-XXXXXXXXXX
-ADS_ID = ''          # Google Ads tag ID, e.g. AW-123456789
-ADS_LEAD_LABEL = ''  # Google Ads conversion label for the property evaluation lead
+# GA4 and Google Ads IDs from Sebastien, Nov 23 2026. Meta pixel stays blank until he sends one.
+GA4_ID = 'G-SFVBFCQWDM'          # Google Analytics 4 measurement ID, e.g. G-XXXXXXXXXX
+ADS_ID = 'AW-18585104480'          # Google Ads tag ID, e.g. AW-123456789
+ADS_LEAD_LABEL = '40NACIC3pr4dEODgiJ5F'  # Google Ads conversion label for the property evaluation lead
 META_PIXEL = ''      # Meta pixel ID
 def tags():
     out = []
