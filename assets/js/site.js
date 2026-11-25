@@ -51,16 +51,27 @@
       var finish = function () {
         if (done) return; done = true;
         try { window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'generate_lead', form: 'property_evaluation', city: form.elements.skyrun_property_city.value }); } catch (e) {}
+        // The native submit leaves the page, which can cut off tag hits still in flight. Hold it until gtag
+        // reports each hit sent, or 1 second at most, so the owner is never stuck. go() runs exactly once.
+        var sent = false;
+        var go = function () {
+          if (sent) return; sent = true;
+          form.dataset.sent = '1';
+          HTMLFormElement.prototype.submit.call(form);   // Netlify copy and the thank you page
+        };
+        var waiting = 0;
+        var hit = function () { waiting++; var called = false; return function () { if (called) return; called = true; if (--waiting <= 0) go(); }; };
+        var release = hit();   // holds the count above 0 while the events are queued, so an early callback cannot submit first
         try {   // Ad and analytics conversions; each fires only when its tag is on the page (see tags() in build_site.py)
           var city = form.elements.skyrun_property_city.value;
           if (window.gtag) {
-            window.gtag('event', 'generate_lead', { form: 'property_evaluation', city: city });
-            if (window.SRD_ADS_LEAD) window.gtag('event', 'conversion', { send_to: window.SRD_ADS_LEAD });
+            window.gtag('event', 'generate_lead', { form: 'property_evaluation', city: city, transport_type: 'beacon', event_callback: hit() });
+            if (window.SRD_ADS_LEAD) window.gtag('event', 'conversion', { send_to: window.SRD_ADS_LEAD, transport_type: 'beacon', event_callback: hit() });
           }
           if (window.fbq) window.fbq('track', 'Lead', { content_name: 'property_evaluation' });
         } catch (e) {}
-        form.dataset.sent = '1';
-        HTMLFormElement.prototype.submit.call(form);   // Netlify copy and the thank you page
+        setTimeout(go, 1000);
+        release();   // with no tag on the page this submits at once
       };
       var url = 'https://api.hsforms.com/submissions/v3/integration/submit/' + form.dataset.hsPortal + '/' + form.dataset.hsForm;
       try {
